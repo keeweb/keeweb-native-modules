@@ -6,19 +6,42 @@ jobs:
   prepare:
     runs-on: ubuntu-latest
     env:
-      BINTRAY_API_KEY: ${{ secrets.BINTRAY_API_KEY }}
-      COMMIT_SHA: ${{ github.sha }}
+#      BINTRAY_API_KEY: ${{ secrets.BINTRAY_API_KEY }}
     steps:
-      - name: Create a new release
-        run: |
-          curl \
-            --silent \
-            --show-error \
-            --request POST \
-            --user antelle:$BINTRAY_API_KEY \
-            --header "Content-Type: application/json" \
-            --data "{\"name\":\"$COMMIT_SHA\"}" \
-            https://api.bintray.com/packages/antelle/generic/keeweb-native-modules/versions
+      - name: Create release
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.sha }}
+          release_name: Release ${{ github.sha }}
+          body: Binaries for ${{ github.sha }}
+          draft: false
+          prerelease: false
+      - name: Build
+        run: echo world > hello.txt
+      - name: Upload assets
+        id: upload-assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: hello.txt
+          asset_name: hello.txt
+          asset_content_type: application/octet-stream
+#      - name: Create a new release
+#        run: |
+#          echo "{\"commit_sha\":\"$COMMIT_SHA\"}" > version.json
+#          curl \
+#            --silent \
+#            --show-error \
+#            --request POST \
+#            --user antelle:$BINTRAY_API_KEY \
+#            --header "Content-Type: application/json" \
+#            --data "{\"name\":\"$COMMIT_SHA\"}" \
+#            https://api.bintray.com/packages/antelle/generic/keeweb-native-modules/versions
 #  build-linux:
 #    runs-on: ubuntu-latest
 #    needs: prepare
