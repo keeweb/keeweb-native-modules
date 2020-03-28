@@ -118,6 +118,8 @@ jobs:
           cp usb-linux/usb_bindings.node package/usb_bindings.linux.node
           cp usb-darwin/usb_bindings.node package/usb_bindings.darwin.node
           cp usb-windows/usb_bindings.node package/usb_bindings.windows.node
+          sed -i '' "s/0.0.0/${{ github.ref }}/g" package/package.json
+          cat package/package.json
           rm -f ~/.npmrc
           echo "//npm.pkg.github.com/:_authToken=$GITHUB_TOKEN" > ~/.npmrc
           npm publish --dry-run package
