@@ -6,7 +6,7 @@ jobs:
   prepare:
     runs-on: ubuntu-latest
     env:
-#      BINTRAY_API_KEY: ${{ secrets.BINTRAY_API_KEY }}
+      BINTRAY_API_KEY: ${{ secrets.BINTRAY_API_KEY }}
     steps:
       - name: Create release
         id: create_release
