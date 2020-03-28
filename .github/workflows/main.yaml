@@ -51,7 +51,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: keytar-darwin
-          path: node_modules/usb/build/Release/keytar.node
+          path: node_modules/keytar/build/Release/keytar.node
   build-windows:
     runs-on: windows-latest
     steps:
