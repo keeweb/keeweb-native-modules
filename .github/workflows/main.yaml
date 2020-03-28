@@ -120,6 +120,9 @@ jobs:
           cp usb-windows/usb_bindings.node package/usb_bindings.windows.node
           sed -i "s/0.0.0/${GITHUB_REF/refs\/tags\//}/g" package/package.json
       - name: Publish npm package
-        run: npm publish package
+        run: |
+          rm -f ~/.npmrc
+          echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" > ~/.npmrc
+          npm publish package
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
