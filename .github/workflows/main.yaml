@@ -119,10 +119,21 @@ jobs:
           cp usb-darwin/usb_bindings.node package/usb_bindings.darwin.node
           cp usb-windows/usb_bindings.node package/usb_bindings.windows.node
           sed -i "s/0.0.0/${GITHUB_REF/refs\/tags\//}/g" package/package.json
+          npm pack ./package
+          mv keeweb-keeweb-native-modules-*.tgz keeweb-native-modules.tgz
       - name: Publish npm package
         run: |
           rm -f ~/.npmrc
-          echo "//registry.npmjs.org/:_authToken=$NODE_AUTH_TOKEN" > ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=$GITHUB_TOKEN" > ~/.npmrc
           npm publish package
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload npm package
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: keeweb-native-modules.tgz
+          asset_name: keeweb-native-modules.tgz
+          asset_content_type: application/octet-stream
