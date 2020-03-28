@@ -114,11 +114,12 @@ jobs:
       - name: NPM publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REF: ${{ github.ref }}
         run: |
           cp usb-linux/usb_bindings.node package/usb_bindings.linux.node
           cp usb-darwin/usb_bindings.node package/usb_bindings.darwin.node
           cp usb-windows/usb_bindings.node package/usb_bindings.windows.node
-          sed -i "s/0.0.0/${{ github.ref }}/g" package/package.json
+          sed -i "s/0.0.0/${GITHUB_REF/refs\/tags\//}/g" package/package.json
           cat package/package.json
           rm -f ~/.npmrc
           echo "//npm.pkg.github.com/:_authToken=$GITHUB_TOKEN" > ~/.npmrc
