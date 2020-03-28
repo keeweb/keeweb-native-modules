@@ -13,7 +13,7 @@ jobs:
       - name: NPM install
         run: npm i --no-fund
       - name: Cleanup
-        run: rm -rf node_modules/usb/build/Release
+        run: rm -r node_modules/usb/build/Release
       - name: Build
         run: npm run-script build
       - name: Upload artifacts
