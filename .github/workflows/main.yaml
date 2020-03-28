@@ -9,9 +9,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: NPM publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: npm publish package
+      - run: rm .npmrc
+      - run: echo "//npm.pkg.github.com/:_authToken=$${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+      - run: npm publish package
 #  build-linux:
 #    runs-on: ubuntu-latest
 #    steps:
