@@ -18,9 +18,9 @@ jobs:
         run: npm run-script build
       - name: Upload artifacts
         uses: actions/upload-artifact@v1
-          with:
-            name: usb-linux
-            path: node_modules/usb/build/Release/usb_bindings.node
+        with:
+          name: usb-linux
+          path: node_modules/usb/build/Release/usb_bindings.node
 #  build-darwin:
 #    runs-on: macos-latest
 #    steps:
@@ -53,9 +53,9 @@ jobs:
       - build-linux
     steps:
       - name: Download artifacts
-          uses: actions/download-artifact@v1
-          with:
-            name: usb-linux
+        uses: actions/download-artifact@v1
+        with:
+          name: usb-linux
       - name: Create release
         id: create_release
         uses: actions/create-release@latest
