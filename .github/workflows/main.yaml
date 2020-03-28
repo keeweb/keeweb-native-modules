@@ -10,7 +10,7 @@ jobs:
       - uses: actions/checkout@v2
       - name: NPM publish
         run: |
-          rm ~/.npmrc
+          rm -f ~/.npmrc
           echo "//npm.pkg.github.com/:_authToken=$${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
           npm publish package
 #  build-linux:
