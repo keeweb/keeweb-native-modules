@@ -1,0 +1,15 @@
+name: CI
+on:
+  push:
+    branches: [ master ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install
+        run: npm i --no-fund
+      - name: Build
+        run: npm run-script build
+      - name: Check
+        run: ls -l node_modules/usb/build/Release
