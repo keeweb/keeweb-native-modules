@@ -94,22 +94,22 @@ jobs:
           asset_name: usb_bindings.linux.node
           asset_content_type: application/octet-stream
       - name: Upload usb darwin build
-          id: upload-assets
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: usb-darwin/usb_bindings.node
-            asset_name: usb_bindings.darwin.node
-            asset_content_type: application/octet-stream
+        id: upload-assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: usb-darwin/usb_bindings.node
+          asset_name: usb_bindings.darwin.node
+          asset_content_type: application/octet-stream
       - name: Upload usb windows build
-          id: upload-assets
-          uses: actions/upload-release-asset@v1
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            upload_url: ${{ steps.create_release.outputs.upload_url }}
-            asset_path: usb-windows/usb_bindings.node
-            asset_name: usb_bindings.windows.node
-            asset_content_type: application/octet-stream
+        id: upload-assets
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: usb-windows/usb_bindings.node
+          asset_name: usb_bindings.windows.node
+          asset_content_type: application/octet-stream
