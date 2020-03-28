@@ -11,7 +11,7 @@ jobs:
       - name: NPM publish
         run: |
           rm -f ~/.npmrc
-          echo "//npm.pkg.github.com/:_authToken=$${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}" > ~/.npmrc
           npm publish package
 #  build-linux:
 #    runs-on: ubuntu-latest
