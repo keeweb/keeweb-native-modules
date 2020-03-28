@@ -11,6 +11,5 @@
     "email": "antelle.net@gmail.com",
     "url": "http://antelle.net"
   },
-  "license": "MIT",
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" }
+  "license": "MIT"
 }
