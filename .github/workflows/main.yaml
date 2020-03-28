@@ -17,7 +17,7 @@ jobs:
             --request POST \
             --user antelle:$BINTRAY_API_KEY \
             --header "Content-Type: application/json" \
-            --data '{"name":"$COMMIT_SHA"}' \
+            --data "{\"name\":\"$COMMIT_SHA\"}" \
             https://api.bintray.com/packages/antelle/generic/keeweb-native-modules/versions
 #  build-linux:
 #    runs-on: ubuntu-latest
