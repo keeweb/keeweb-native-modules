@@ -111,13 +111,15 @@ jobs:
           asset_path: usb-windows/usb_bindings.node
           asset_name: usb_bindings.windows.node
           asset_content_type: application/octet-stream
-      - name: NPM publish
+      - name: Build npm package
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_REF: ${{ github.ref }}
         run: |
           cp usb-linux/usb_bindings.node package/usb_bindings.linux.node
           cp usb-darwin/usb_bindings.node package/usb_bindings.darwin.node
           cp usb-windows/usb_bindings.node package/usb_bindings.windows.node
           sed -i "s/0.0.0/${GITHUB_REF/refs\/tags\//}/g" package/package.json
-          npm publish package
+      - name: Publish npm package
+        run: npm publish package
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
