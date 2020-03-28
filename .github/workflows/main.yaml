@@ -7,7 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install
+      - name: Install dependencies
+        run: apt-get install libudev-dev
+      - name: NPM install
         run: npm i --no-fund
       - name: Build
         run: npm run-script build
