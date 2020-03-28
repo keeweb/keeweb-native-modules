@@ -38,8 +38,8 @@ jobs:
       - name: NPM install
         run: npm i --no-fund
       - name: Cleanup
-        run: rm -rf node_modules/usb/build/Release
+        run: rd -r node_modules\usb\build\Release
       - name: Build
         run: npm run-script build
       - name: Check
-        run: ls -l node_modules/usb/build/Release
+        run: ls -l node_modules\usb\build\Release
