@@ -17,12 +17,24 @@ jobs:
 #        run: npm run-script build
 #      - name: Check
 #        run: ls -l node_modules/usb/build/Release
-  darwin:
-    runs-on: macos-latest
+#  darwin:
+#    runs-on: macos-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Install dependencies
+#        run: brew install libuv
+#      - name: NPM install
+#        run: npm i --no-fund
+#      - name: Cleanup
+#        run: rm -rf node_modules/usb/build/Release
+#      - name: Build
+#        run: npm run-script build
+#      - name: Check
+#        run: ls -l node_modules/usb/build/Release
+  windows:
+    runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install dependencies
-        run: brew install libuv
       - name: NPM install
         run: npm i --no-fund
       - name: Cleanup
