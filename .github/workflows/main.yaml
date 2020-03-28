@@ -3,14 +3,30 @@ on:
   push:
     branches: [ master ]
 jobs:
-  build:
-    runs-on: ubuntu-latest
+#  linux:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Install dependencies
+#        run: sudo apt-get install libudev-dev
+#      - name: NPM install
+#        run: npm i --no-fund
+#      - name: Cleanup
+#        run: rm -rf node_modules/usb/build/Release
+#      - name: Build
+#        run: npm run-script build
+#      - name: Check
+#        run: ls -l node_modules/usb/build/Release
+  darwin:
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
-        run: sudo apt-get install libudev-dev
+        run: brew install libudev
       - name: NPM install
         run: npm i --no-fund
+      - name: Cleanup
+        run: rm -rf node_modules/usb/build/Release
       - name: Build
         run: npm run-script build
       - name: Check
