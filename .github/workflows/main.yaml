@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
-        run: apt-get install libudev-dev
+        run: sudo apt-get install libudev-dev
       - name: NPM install
         run: npm i --no-fund
       - name: Build
