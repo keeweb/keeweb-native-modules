@@ -22,7 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Install dependencies
-        run: brew install libudev
+        run: brew install libuv
       - name: NPM install
         run: npm i --no-fund
       - name: Cleanup
