@@ -74,12 +74,15 @@ jobs:
         run: |
           rm -r node_modules\usb\build\Release
           rm -r node_modules\keytar\build\Release
+          rm -r node_modules\argon2\lib\binding
+      - name: Build
+        run: npm run-script build
+      - name: ls
+        run: |
+          ls node_modules\argon2\lib\binding
           ls node_modules\argon2
           ls node_modules\argon2\build
           ls node_modules\argon2\build\Release
-          rm -r node_modules\argon2\build\Release
-      - name: Build
-        run: npm run-script build
       - name: Upload usb artifact
         uses: actions/upload-artifact@v1
         with:
@@ -94,7 +97,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: argon2-windows
-          path: node_modules/argon2/build/Release/argon2.node
+          path: node_modules/argon2/lib/binding/argon2.node
   publish:
     runs-on: ubuntu-latest
     needs:
