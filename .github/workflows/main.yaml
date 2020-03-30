@@ -125,17 +125,17 @@ jobs:
         with:
           name: keytar-darwin
       - name: Download argon2 darwin build
-          uses: actions/download-artifact@v1
-          with:
-            name: argon2-darwin
+        uses: actions/download-artifact@v1
+        with:
+          name: argon2-darwin
       - name: Download keytar windows build
         uses: actions/download-artifact@v1
         with:
           name: keytar-windows
       - name: Download argon2 windows build
-          uses: actions/download-artifact@v1
-          with:
-            name: argon2-windows
+        uses: actions/download-artifact@v1
+        with:
+          name: argon2-windows
       - name: Create release
         id: create_release
         uses: actions/create-release@latest
