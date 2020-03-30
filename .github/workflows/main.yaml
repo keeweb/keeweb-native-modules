@@ -77,12 +77,6 @@ jobs:
           rm -r node_modules\argon2\lib\binding
       - name: Build
         run: npm run-script build
-      - name: ls
-        run: |
-          ls node_modules\argon2\lib\binding
-          ls node_modules\argon2
-          ls node_modules\argon2\build
-          ls node_modules\argon2\build\Release
       - name: Upload usb artifact
         uses: actions/upload-artifact@v1
         with:
