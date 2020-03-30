@@ -74,6 +74,9 @@ jobs:
         run: |
           rm -r node_modules\usb\build\Release
           rm -r node_modules\keytar\build\Release
+          ls node_modules\argon2
+          ls node_modules\argon2\build
+          ls node_modules\argon2\build\Release
           rm -r node_modules\argon2\build\Release
       - name: Build
         run: npm run-script build
