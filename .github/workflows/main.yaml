@@ -16,6 +16,7 @@ jobs:
         run: |
           rm -rf node_modules/usb/build/Release
           rm -rf node_modules/keytar/build/Release
+          rm -rf node_modules/argon2/build/Release
       - name: Build
         run: npm run-script build
       - name: Upload usb artifact
@@ -28,6 +29,11 @@ jobs:
         with:
           name: keytar-linux
           path: node_modules/keytar/build/Release/keytar.node
+      - name: Upload argon2 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: argon2-linux
+          path: node_modules/argon2/build/Release/argon2.node
   build-darwin:
     runs-on: macos-latest
     steps:
@@ -40,6 +46,7 @@ jobs:
         run: |
           rm -rf node_modules/usb/build/Release
           rm -rf node_modules/keytar/build/Release
+          rm -rf node_modules/argon2/build/Release
       - name: Build
         run: npm run-script build
       - name: Upload usb artifact
@@ -52,6 +59,11 @@ jobs:
         with:
           name: keytar-darwin
           path: node_modules/keytar/build/Release/keytar.node
+      - name: Upload argon2 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: argon2-darwin
+          path: node_modules/argon2/build/Release/argon2.node
   build-windows:
     runs-on: windows-latest
     steps:
@@ -62,6 +74,7 @@ jobs:
         run: |
           rm -r node_modules\usb\build\Release
           rm -r node_modules\keytar\build\Release
+          rm -r node_modules\argon2\build\Release
       - name: Build
         run: npm run-script build
       - name: Upload usb artifact
@@ -74,6 +87,11 @@ jobs:
         with:
           name: keytar-windows
           path: node_modules/keytar/build/Release/keytar.node
+      - name: Upload argon2 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: argon2-windows
+          path: node_modules/argon2/build/Release/argon2.node
   publish:
     runs-on: ubuntu-latest
     needs:
@@ -98,14 +116,26 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: keytar-linux
+      - name: Download argon2 linux build
+        uses: actions/download-artifact@v1
+        with:
+          name: argon2-linux
       - name: Download keytar darwin build
         uses: actions/download-artifact@v1
         with:
           name: keytar-darwin
+      - name: Download argon2 darwin build
+          uses: actions/download-artifact@v1
+          with:
+            name: argon2-darwin
       - name: Download keytar windows build
         uses: actions/download-artifact@v1
         with:
           name: keytar-windows
+      - name: Download argon2 windows build
+          uses: actions/download-artifact@v1
+          with:
+            name: argon2-windows
       - name: Create release
         id: create_release
         uses: actions/create-release@latest
@@ -117,60 +147,6 @@ jobs:
           body: Binaries built from ${{ github.sha }}
           draft: false
           prerelease: false
-      - name: Upload usb linux build
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: usb-linux/usb_bindings.node
-          asset_name: usb.linux.node
-          asset_content_type: application/octet-stream
-      - name: Upload usb darwin build
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: usb-darwin/usb_bindings.node
-          asset_name: usb.darwin.node
-          asset_content_type: application/octet-stream
-      - name: Upload usb windows build
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: usb-windows/usb_bindings.node
-          asset_name: usb.windows.node
-          asset_content_type: application/octet-stream
-      - name: Upload keytar linux build
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: keytar-linux/keytar.node
-          asset_name: keytar.linux.node
-          asset_content_type: application/octet-stream
-      - name: Upload keytar darwin build
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: keytar-darwin/keytar.node
-          asset_name: keytar.darwin.node
-          asset_content_type: application/octet-stream
-      - name: Upload keytar windows build
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: keytar-windows/keytar.node
-          asset_name: keytar.windows.node
-          asset_content_type: application/octet-stream
       - name: Build npm package
         env:
           GITHUB_REF: ${{ github.ref }}
@@ -181,6 +157,9 @@ jobs:
           cp keytar-linux/keytar.node package/keytar.linux.node
           cp keytar-darwin/keytar.node package/keytar.darwin.node
           cp keytar-windows/keytar.node package/keytar.windows.node
+          cp argon2-linux/argon2.node package/argon2.linux.node
+          cp argon2-darwin/argon2.node package/argon2.darwin.node
+          cp argon2-windows/argon2.node package/argon2.windows.node
           sed -i "s/0.0.0/${GITHUB_REF/refs\/tags\//}/g" package/package.json
           npm pack ./package
           mv keeweb-keeweb-native-modules-*.tgz keeweb-native-modules.tgz
