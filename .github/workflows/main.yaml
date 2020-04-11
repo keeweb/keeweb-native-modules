@@ -14,16 +14,16 @@ jobs:
         run: npm i --no-fund
       - name: Cleanup
         run: |
-          rm -rf node_modules/usb/build/Release
+          rm -rf node_modules/pcsclite/build/Release
           rm -rf node_modules/keytar/build/Release
           rm -rf node_modules/argon2/build/Release
       - name: Build
         run: npm run-script build
-      - name: Upload usb artifact
+      - name: Upload pcsclite artifact
         uses: actions/upload-artifact@v1
         with:
-          name: usb-linux
-          path: node_modules/usb/build/Release/usb_bindings.node
+          name: pcsclite-linux
+          path: node_modules/pcsclite/build/Release/pcsclite.node
       - name: Upload keytar artifact
         uses: actions/upload-artifact@v1
         with:
@@ -44,16 +44,16 @@ jobs:
         run: npm i --no-fund
       - name: Cleanup
         run: |
-          rm -rf node_modules/usb/build/Release
+          rm -rf node_modules/pcsclite/build/Release
           rm -rf node_modules/keytar/build/Release
           rm -rf node_modules/argon2/build/Release
       - name: Build
         run: npm run-script build
-      - name: Upload usb artifact
+      - name: Upload pcsclite artifact
         uses: actions/upload-artifact@v1
         with:
-          name: usb-darwin
-          path: node_modules/usb/build/Release/usb_bindings.node
+          name: pcsclite-darwin
+          path: node_modules/pcsclite/build/Release/pcsclite.node
       - name: Upload keytar artifact
         uses: actions/upload-artifact@v1
         with:
@@ -72,16 +72,16 @@ jobs:
         run: npm i --no-fund
       - name: Cleanup
         run: |
-          rm -r node_modules\usb\build\Release
+          rm -r node_modules\pcsclite\build\Release
           rm -r node_modules\keytar\build\Release
           rm -r node_modules\argon2\lib\binding
       - name: Build
         run: npm run-script build
-      - name: Upload usb artifact
+      - name: Upload pcsclite artifact
         uses: actions/upload-artifact@v1
         with:
-          name: usb-windows
-          path: node_modules/usb/build/Release/usb_bindings.node
+          name: pcsclite-windows
+          path: node_modules/pcsclite/build/Release/pcsclite.node
       - name: Upload keytar artifact
         uses: actions/upload-artifact@v1
         with:
@@ -100,18 +100,18 @@ jobs:
       - build-windows
     steps:
       - uses: actions/checkout@v2
-      - name: Download usb linux build
+      - name: Download pcsclite linux build
         uses: actions/download-artifact@v1
         with:
-          name: usb-linux
-      - name: Download usb darwin build
+          name: pcsclite-linux
+      - name: Download pcsclite darwin build
         uses: actions/download-artifact@v1
         with:
-          name: usb-darwin
-      - name: Download usb windows build
+          name: pcsclite-darwin
+      - name: Download pcsclite windows build
         uses: actions/download-artifact@v1
         with:
-          name: usb-windows
+          name: pcsclite-windows
       - name: Download keytar linux build
         uses: actions/download-artifact@v1
         with:
@@ -151,9 +151,9 @@ jobs:
         env:
           GITHUB_REF: ${{ github.ref }}
         run: |
-          cp usb-linux/usb_bindings.node package/usb.linux.node
-          cp usb-darwin/usb_bindings.node package/usb.darwin.node
-          cp usb-windows/usb_bindings.node package/usb.windows.node
+          cp pcsclite-linux/pcsclite.node package/pcsclite.linux.node
+          cp pcsclite-darwin/pcsclite.node package/pcsclite.darwin.node
+          cp pcsclite-windows/pcsclite.node package/pcsclite.windows.node
           cp keytar-linux/keytar.node package/keytar.linux.node
           cp keytar-darwin/keytar.node package/keytar.darwin.node
           cp keytar-windows/keytar.node package/keytar.windows.node

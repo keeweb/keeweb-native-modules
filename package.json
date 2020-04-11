@@ -24,7 +24,7 @@
   "dependencies": {
     "argon2": "^0.26.1",
     "keytar": "^5.4.0",
-    "usb": "^1.6.2"
+    "pcsclite": "^1.0.0"
   },
   "private": true
 }
