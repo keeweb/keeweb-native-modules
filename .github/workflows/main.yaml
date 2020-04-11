@@ -116,22 +116,22 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: keytar-linux
-      - name: Download argon2 linux build
-        uses: actions/download-artifact@v1
-        with:
-          name: argon2-linux
       - name: Download keytar darwin build
         uses: actions/download-artifact@v1
         with:
           name: keytar-darwin
-      - name: Download argon2 darwin build
-        uses: actions/download-artifact@v1
-        with:
-          name: argon2-darwin
       - name: Download keytar windows build
         uses: actions/download-artifact@v1
         with:
           name: keytar-windows
+      - name: Download argon2 linux build
+        uses: actions/download-artifact@v1
+        with:
+          name: argon2-linux
+      - name: Download argon2 darwin build
+        uses: actions/download-artifact@v1
+        with:
+          name: argon2-darwin
       - name: Download argon2 windows build
         uses: actions/download-artifact@v1
         with:
