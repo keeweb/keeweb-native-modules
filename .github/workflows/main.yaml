@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Update
-        run: apt-get update
+        run: sudo apt-get update
       - name: Install dependencies
         run: sudo apt-get install libudev-dev libpcsclite1 libpcsclite-dev
       - name: NPM install
