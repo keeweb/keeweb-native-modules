@@ -100,22 +100,22 @@ jobs:
       - name: Upload usb x64 artifact
         uses: actions/upload-artifact@v1
         with:
-          name: usb-windows-x64
+          name: usb-win32-x64
           path: node_modules/usb/build/Release/usb_bindings.node
       - name: Upload pcsclite x64 artifact
         uses: actions/upload-artifact@v1
         with:
-          name: pcsclite-windows-x64
+          name: pcsclite-win32-x64
           path: node_modules/pcsclite/build/Release/pcsclite.node
       - name: Upload keytar x64 artifact
         uses: actions/upload-artifact@v1
         with:
-          name: keytar-windows-x64
+          name: keytar-win32-x64
           path: node_modules/keytar/build/Release/keytar.node
       - name: Upload argon2 x64 artifact
         uses: actions/upload-artifact@v1
         with:
-          name: argon2-windows-x64
+          name: argon2-win32-x64
           path: node_modules/argon2/lib/binding/argon2.node
 
       - name: Cleanup
@@ -129,22 +129,22 @@ jobs:
       - name: Upload usb ia32 artifact
         uses: actions/upload-artifact@v1
         with:
-          name: usb-windows-ia32
+          name: usb-win32-ia32
           path: node_modules/usb/build/Release/usb_bindings.node
       - name: Upload pcsclite ia32 artifact
         uses: actions/upload-artifact@v1
         with:
-          name: pcsclite-windows-ia32
+          name: pcsclite-win32-ia32
           path: node_modules/pcsclite/build/Release/pcsclite.node
       - name: Upload keytar ia32 artifact
         uses: actions/upload-artifact@v1
         with:
-          name: keytar-windows-ia32
+          name: keytar-win32-ia32
           path: node_modules/keytar/build/Release/keytar.node
       - name: Upload argon2 ia32 artifact
         uses: actions/upload-artifact@v1
         with:
-          name: argon2-windows-ia32
+          name: argon2-win32-ia32
           path: node_modules/argon2/lib/binding/argon2.node
 
       - name: Cleanup
@@ -158,22 +158,22 @@ jobs:
       - name: Upload usb arm64 artifact
         uses: actions/upload-artifact@v1
         with:
-          name: usb-windows-arm64
+          name: usb-win32-arm64
           path: node_modules/usb/build/Release/usb_bindings.node
       - name: Upload pcsclite arm64 artifact
         uses: actions/upload-artifact@v1
         with:
-          name: pcsclite-windows-arm64
+          name: pcsclite-win32-arm64
           path: node_modules/pcsclite/build/Release/pcsclite.node
       - name: Upload keytar arm64 artifact
         uses: actions/upload-artifact@v1
         with:
-          name: keytar-windows-arm64
+          name: keytar-win32-arm64
           path: node_modules/keytar/build/Release/keytar.node
       - name: Upload argon2 arm64 artifact
         uses: actions/upload-artifact@v1
         with:
-          name: argon2-windows-arm64
+          name: argon2-win32-arm64
           path: node_modules/argon2/lib/binding/argon2.node
 
   publish:
@@ -196,15 +196,15 @@ jobs:
       - name: Download usb windows x64 build
         uses: actions/download-artifact@v1
         with:
-          name: usb-windows-x64
+          name: usb-win32-x64
       - name: Download usb windows ia32 build
         uses: actions/download-artifact@v1
         with:
-          name: usb-windows-ia32
+          name: usb-win32-ia32
       - name: Download usb windows arm64 build
         uses: actions/download-artifact@v1
         with:
-          name: usb-windows-arm64
+          name: usb-win32-arm64
 
       - name: Download pcsclite linux build
         uses: actions/download-artifact@v1
@@ -217,15 +217,15 @@ jobs:
       - name: Download pcsclite windows x64 build
         uses: actions/download-artifact@v1
         with:
-          name: pcsclite-windows-x64
+          name: pcsclite-win32-x64
       - name: Download pcsclite windows ia32 build
         uses: actions/download-artifact@v1
         with:
-          name: pcsclite-windows-ia32
+          name: pcsclite-win32-ia32
       - name: Download pcsclite windows arm64 build
         uses: actions/download-artifact@v1
         with:
-          name: pcsclite-windows-arm64
+          name: pcsclite-win32-arm64
 
       - name: Download keytar linux build
         uses: actions/download-artifact@v1
@@ -238,15 +238,15 @@ jobs:
       - name: Download keytar windows x64 build
         uses: actions/download-artifact@v1
         with:
-          name: keytar-windows-x64
+          name: keytar-win32-x64
       - name: Download keytar windows ia32 build
         uses: actions/download-artifact@v1
         with:
-          name: keytar-windows-ia32
+          name: keytar-win32-ia32
       - name: Download keytar windows arm64 build
         uses: actions/download-artifact@v1
         with:
-          name: keytar-windows-arm64
+          name: keytar-win32-arm64
 
       - name: Download argon2 linux build
         uses: actions/download-artifact@v1
@@ -259,15 +259,15 @@ jobs:
       - name: Download argon2 windows x64 build
         uses: actions/download-artifact@v1
         with:
-          name: argon2-windows-x64
+          name: argon2-win32-x64
       - name: Download argon2 windows ia32 build
         uses: actions/download-artifact@v1
         with:
-          name: argon2-windows-ia32
+          name: argon2-win32-ia32
       - name: Download argon2 windows arm64 build
         uses: actions/download-artifact@v1
         with:
-          name: argon2-windows-arm64
+          name: argon2-win32-arm64
 
       - name: Create release
         id: create_release
@@ -286,27 +286,27 @@ jobs:
         run: |
           cp usb-linux-x64/usb_bindings.node package/usb-linux-x64.node
           cp usb-darwin-x64/usb_bindings.node package/usb-darwin-x64.node
-          cp usb-windows-x64/usb_bindings.node package/usb-windows-x64.node
-          cp usb-windows-ia32/usb_bindings.node package/usb-windows-ia32.node
-          cp usb-windows-arm64/usb_bindings.node package/usb-windows-arm64.node
+          cp usb-win32-x64/usb_bindings.node package/usb-win32-x64.node
+          cp usb-win32-ia32/usb_bindings.node package/usb-win32-ia32.node
+          cp usb-win32-arm64/usb_bindings.node package/usb-win32-arm64.node
 
           cp pcsclite-linux-x64/pcsclite.node package/pcsclite-linux-x64.node
           cp pcsclite-darwin-x64/pcsclite.node package/pcsclite-darwin-x64.node
-          cp pcsclite-windows-x64/pcsclite.node package/pcsclite-windows-x64.node
-          cp pcsclite-windows-ia32/pcsclite.node package/pcsclite-windows-ia32.node
-          cp pcsclite-windows-arm64/pcsclite.node package/pcsclite-windows-arm64.node
+          cp pcsclite-win32-x64/pcsclite.node package/pcsclite-win32-x64.node
+          cp pcsclite-win32-ia32/pcsclite.node package/pcsclite-win32-ia32.node
+          cp pcsclite-win32-arm64/pcsclite.node package/pcsclite-win32-arm64.node
 
           cp keytar-linux-x64/keytar.node package/keytar-linux-x64.node
           cp keytar-darwin-x64/keytar.node package/keytar-darwin-x64.node
-          cp keytar-windows-x64/keytar.node package/keytar-windows-x64.node
-          cp keytar-windows-ia32/keytar.node package/keytar-windows-ia32.node
-          cp keytar-windows-arm64/keytar.node package/keytar-windows-arm64.node
+          cp keytar-win32-x64/keytar.node package/keytar-win32-x64.node
+          cp keytar-win32-ia32/keytar.node package/keytar-win32-ia32.node
+          cp keytar-win32-arm64/keytar.node package/keytar-win32-arm64.node
 
           cp argon2-linux-x64/argon2.node package/argon2-linux-x64.node
           cp argon2-darwin-x64/argon2.node package/argon2-darwin-x64.node
-          cp argon2-windows-x64/argon2.node package/argon2-windows-x64.node
-          cp argon2-windows-ia32/argon2.node package/argon2-windows-ia32.node
-          cp argon2-windows-arm64/argon2.node package/argon2-windows-arm64.node
+          cp argon2-win32-x64/argon2.node package/argon2-win32-x64.node
+          cp argon2-win32-ia32/argon2.node package/argon2-win32-ia32.node
+          cp argon2-win32-arm64/argon2.node package/argon2-win32-arm64.node
 
           sed -i "s/0.0.0/${GITHUB_REF/refs\/tags\//}/g" package/package.json
           npm pack ./package
