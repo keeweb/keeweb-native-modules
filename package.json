@@ -4,7 +4,9 @@
   "description": "This repo contains native modules for [KeeWeb](https://keeweb.info).",
   "main": "index.js",
   "scripts": {
-    "build": "electron-rebuild --arch=bad",
+    "build-x64": "electron-rebuild --arch=x64",
+    "build-ia32": "electron-rebuild --arch=ia32",
+    "build-arm64": "electron-rebuild --arch=arm64",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
