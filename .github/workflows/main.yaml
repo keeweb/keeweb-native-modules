@@ -13,13 +13,12 @@ jobs:
       - name: Update
         run: sudo apt-get update
       - name: Install dependencies
-        run: sudo apt-get install libudev-dev libpcsclite1 libpcsclite-dev
+        run: sudo apt-get install libudev-dev
       - name: NPM install
         run: npm i --no-fund
       - name: Cleanup
         run: |
           rm -rf node_modules/usb/build/Release
-          rm -rf node_modules/pcsclite/build/Release
           rm -rf node_modules/keytar/build/Release
           rm -rf node_modules/argon2/build/Release
       - name: Build
@@ -29,11 +28,6 @@ jobs:
         with:
           name: usb-linux-x64
           path: node_modules/usb/build/Release/usb_bindings.node
-      - name: Upload pcsclite artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: pcsclite-linux-x64
-          path: node_modules/pcsclite/build/Release/pcsclite.node
       - name: Upload keytar artifact
         uses: actions/upload-artifact@v1
         with:
@@ -56,7 +50,6 @@ jobs:
       - name: Cleanup
         run: |
           rm -rf node_modules/usb/build/Release
-          rm -rf node_modules/pcsclite/build/Release
           rm -rf node_modules/keytar/build/Release
           rm -rf node_modules/argon2/build/Release
       - name: Build
@@ -66,11 +59,6 @@ jobs:
         with:
           name: usb-darwin-x64
           path: node_modules/usb/build/Release/usb_bindings.node
-      - name: Upload pcsclite artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: pcsclite-darwin-x64
-          path: node_modules/pcsclite/build/Release/pcsclite.node
       - name: Upload keytar artifact
         uses: actions/upload-artifact@v1
         with:
@@ -92,7 +80,6 @@ jobs:
       - name: Cleanup
         run: |
           rm -r node_modules\usb\build\Release
-          rm -r node_modules\pcsclite\build\Release
           rm -r node_modules\keytar\build\Release
           rm -r node_modules\argon2\lib\binding
       - name: Build x64
@@ -102,11 +89,6 @@ jobs:
         with:
           name: usb-win32-x64
           path: node_modules/usb/build/Release/usb_bindings.node
-      - name: Upload pcsclite x64 artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: pcsclite-win32-x64
-          path: node_modules/pcsclite/build/Release/pcsclite.node
       - name: Upload keytar x64 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -121,7 +103,6 @@ jobs:
       - name: Cleanup
         run: |
           rm -r node_modules\usb\build\Release
-          rm -r node_modules\pcsclite\build\Release
           rm -r node_modules\keytar\build\Release
           rm -r node_modules\argon2\lib\binding
       - name: Build ia32
@@ -131,11 +112,6 @@ jobs:
         with:
           name: usb-win32-ia32
           path: node_modules/usb/build/Release/usb_bindings.node
-      - name: Upload pcsclite ia32 artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: pcsclite-win32-ia32
-          path: node_modules/pcsclite/build/Release/pcsclite.node
       - name: Upload keytar ia32 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -150,7 +126,6 @@ jobs:
       - name: Cleanup
         run: |
           rm -r node_modules\usb\build\Release
-          rm -r node_modules\pcsclite\build\Release
           rm -r node_modules\keytar\build\Release
           rm -r node_modules\argon2\lib\binding
       - name: Build arm64
@@ -160,11 +135,6 @@ jobs:
         with:
           name: usb-win32-arm64
           path: node_modules/usb/build/Release/usb_bindings.node
-      - name: Upload pcsclite arm64 artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: pcsclite-win32-arm64
-          path: node_modules/pcsclite/build/Release/pcsclite.node
       - name: Upload keytar arm64 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -205,27 +175,6 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: usb-win32-arm64
-
-      - name: Download pcsclite linux build
-        uses: actions/download-artifact@v1
-        with:
-          name: pcsclite-linux-x64
-      - name: Download pcsclite darwin build
-        uses: actions/download-artifact@v1
-        with:
-          name: pcsclite-darwin-x64
-      - name: Download pcsclite windows x64 build
-        uses: actions/download-artifact@v1
-        with:
-          name: pcsclite-win32-x64
-      - name: Download pcsclite windows ia32 build
-        uses: actions/download-artifact@v1
-        with:
-          name: pcsclite-win32-ia32
-      - name: Download pcsclite windows arm64 build
-        uses: actions/download-artifact@v1
-        with:
-          name: pcsclite-win32-arm64
 
       - name: Download keytar linux build
         uses: actions/download-artifact@v1
@@ -289,12 +238,6 @@ jobs:
           cp usb-win32-x64/usb_bindings.node package/usb-win32-x64.node
           cp usb-win32-ia32/usb_bindings.node package/usb-win32-ia32.node
           cp usb-win32-arm64/usb_bindings.node package/usb-win32-arm64.node
-
-          cp pcsclite-linux-x64/pcsclite.node package/pcsclite-linux-x64.node
-          cp pcsclite-darwin-x64/pcsclite.node package/pcsclite-darwin-x64.node
-          cp pcsclite-win32-x64/pcsclite.node package/pcsclite-win32-x64.node
-          cp pcsclite-win32-ia32/pcsclite.node package/pcsclite-win32-ia32.node
-          cp pcsclite-win32-arm64/pcsclite.node package/pcsclite-win32-arm64.node
 
           cp keytar-linux-x64/keytar.node package/keytar-linux-x64.node
           cp keytar-darwin-x64/keytar.node package/keytar-darwin-x64.node
