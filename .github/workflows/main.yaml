@@ -13,7 +13,7 @@ jobs:
       - name: Update
         run: sudo apt-get update
       - name: Install dependencies
-        run: sudo apt-get install libudev-dev
+        run: sudo apt-get install libudev-dev libusb-1.0-0-dev
       - name: NPM install
         run: npm i --no-fund
       - name: Cleanup
