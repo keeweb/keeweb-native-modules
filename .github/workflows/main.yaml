@@ -40,10 +40,10 @@ jobs:
           name: argon2-linux-x64
           path: node_modules/argon2/build/Release/argon2.node
       - name: Upload yubikey-chalresp artifact
-          uses: actions/upload-artifact@v1
-          with:
-            name: yubikey-chalresp-linux-x64
-            path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
+        uses: actions/upload-artifact@v1
+        with:
+          name: yubikey-chalresp-linux-x64
+          path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
 
   build-darwin:
     runs-on: macos-latest
@@ -77,10 +77,10 @@ jobs:
           name: argon2-darwin-x64
           path: node_modules/argon2/build/Release/argon2.node
       - name: Upload yubikey-chalresp artifact
-          uses: actions/upload-artifact@v1
-          with:
-            name: yubikey-chalresp-darwin-x64
-            path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
+        uses: actions/upload-artifact@v1
+        with:
+          name: yubikey-chalresp-darwin-x64
+          path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
 
   build-windows:
     runs-on: windows-latest
@@ -113,10 +113,10 @@ jobs:
           name: argon2-win32-x64
           path: node_modules/argon2/lib/binding/argon2.node
       - name: Upload yubikey-chalresp x64 artifact
-          uses: actions/upload-artifact@v1
-          with:
-            name: yubikey-chalresp-win32-x64
-            path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
+        uses: actions/upload-artifact@v1
+        with:
+          name: yubikey-chalresp-win32-x64
+          path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
 
       - name: Cleanup
         run: |
@@ -142,10 +142,10 @@ jobs:
           name: argon2-win32-ia32
           path: node_modules/argon2/lib/binding/argon2.node
       - name: Upload yubikey-chalresp ia32 artifact
-          uses: actions/upload-artifact@v1
-          with:
-            name: yubikey-chalresp-win32-ia32
-            path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
+        uses: actions/upload-artifact@v1
+        with:
+          name: yubikey-chalresp-win32-ia32
+          path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
 
       - name: Cleanup
         run: |
@@ -171,10 +171,10 @@ jobs:
           name: argon2-win32-arm64
           path: node_modules/argon2/lib/binding/argon2.node
       - name: Upload yubikey-chalresp arm64 artifact
-          uses: actions/upload-artifact@v1
-          with:
-            name: yubikey-chalresp-win32-arm64
-            path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
+        uses: actions/upload-artifact@v1
+        with:
+          name: yubikey-chalresp-win32-arm64
+          path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
 
   publish:
     runs-on: ubuntu-latest
