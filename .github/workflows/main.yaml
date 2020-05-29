@@ -302,11 +302,11 @@ jobs:
           cp argon2-win32-ia32/argon2.node package/argon2-win32-ia32.node
           cp argon2-win32-arm64/argon2.node package/argon2-win32-arm64.node
 
-          cp yubikey-chalresp-linux-x64/yubikey-chalresp_bindings.node package/yubikey-chalresp-linux-x64.node
-          cp yubikey-chalresp-darwin-x64/yubikey-chalresp_bindings.node package/yubikey-chalresp-darwin-x64.node
-          cp yubikey-chalresp-win32-x64/yubikey-chalresp_bindings.node package/yubikey-chalresp-win32-x64.node
-          cp yubikey-chalresp-win32-ia32/yubikey-chalresp_bindings.node package/yubikey-chalresp-win32-ia32.node
-          cp yubikey-chalresp-win32-arm64/yubikey-chalresp_bindings.node package/yubikey-chalresp-win32-arm64.node
+          cp yubikey-chalresp-linux-x64/yubikey-chalresp.node package/yubikey-chalresp-linux-x64.node
+          cp yubikey-chalresp-darwin-x64/yubikey-chalresp.node package/yubikey-chalresp-darwin-x64.node
+          cp yubikey-chalresp-win32-x64/yubikey-chalresp.node package/yubikey-chalresp-win32-x64.node
+          cp yubikey-chalresp-win32-ia32/yubikey-chalresp.node package/yubikey-chalresp-win32-ia32.node
+          cp yubikey-chalresp-win32-arm64/yubikey-chalresp.node package/yubikey-chalresp-win32-arm64.node
 
           sed -i "s/0.0.0/${GITHUB_REF/refs\/tags\//}/g" package/package.json
           npm pack ./package
