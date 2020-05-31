@@ -91,7 +91,6 @@ jobs:
 
       - name: Cleanup
         run: |
-          tree node_modules /f
           rm -r node_modules\usb\build\Release
           rm -r node_modules\keytar\build\Release
           rm -r node_modules\argon2\lib\binding
@@ -110,12 +109,12 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: keytar-win32-x64
-          path: node_modules/keytar/build/Release/napi-v3/keytar.node
+          path: node_modules/keytar/build/Release/keytar.node
       - name: Upload argon2 x64 artifact
         uses: actions/upload-artifact@v1
         with:
           name: argon2-win32-x64
-          path: node_modules/argon2/lib/binding/argon2.node
+          path: node_modules/argon2/lib/Release/argon2.node
       - name: Upload yubikey-chalresp x64 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -130,6 +129,9 @@ jobs:
           rm -r node_modules\yubikey-chalresp\build\Release
       - name: Build ia32
         run: npm run-script build-ia32
+      - name: Check
+        run: |
+          tree node_modules /f
       - name: Upload usb ia32 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -144,7 +146,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: argon2-win32-ia32
-          path: node_modules/argon2/lib/binding/argon2.node
+          path: node_modules/argon2/lib/Release/argon2.node
       - name: Upload yubikey-chalresp ia32 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -159,6 +161,9 @@ jobs:
           rm -r node_modules\yubikey-chalresp\build\Release
       - name: Build arm64
         run: npm run-script build-arm64
+      - name: Check
+        run: |
+          tree node_modules /f
       - name: Upload usb arm64 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -173,7 +178,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: argon2-win32-arm64
-          path: node_modules/argon2/lib/binding/argon2.node
+          path: node_modules/argon2/lib/Release/argon2.node
       - name: Upload yubikey-chalresp arm64 artifact
         uses: actions/upload-artifact@v1
         with:
