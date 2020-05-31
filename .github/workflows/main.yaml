@@ -94,6 +94,7 @@ jobs:
           ls -l node_modules\argon2\
           ls -l node_modules\argon2\lib\
           ls -l node_modules\argon2\lib\binding\
+          ls -l node_modules\argon2\lib\binding\napi-v3\
           rm -r node_modules\usb\build\Release
           rm -r node_modules\keytar\build\Release
           rm -r node_modules\argon2\lib\binding
@@ -105,6 +106,7 @@ jobs:
           ls -l node_modules\argon2\
           ls -l node_modules\argon2\lib\
           ls -l node_modules\argon2\lib\binding\
+          ls -l node_modules\argon2\lib\binding\napi-v3\
       - name: Upload usb x64 artifact
         uses: actions/upload-artifact@v1
         with:
