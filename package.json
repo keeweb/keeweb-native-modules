@@ -20,14 +20,14 @@
   },
   "homepage": "https://github.com/antelle/keeweb-native-modules#readme",
   "devDependencies": {
-    "electron": "^8.2.0",
-    "electron-rebuild": "^1.10.1"
+    "electron": "^9.0.0",
+    "electron-rebuild": "^1.11.0"
   },
   "dependencies": {
-    "argon2": "^0.26.1",
-    "keytar": "^5.4.0",
-    "usb": "^1.6.2",
-    "yubikey-chalresp": "^0.1.2"
+    "argon2": "^0.26.2",
+    "keytar": "^6.0.1",
+    "usb": "^1.6.3",
+    "yubikey-chalresp": "^0.2.0"
   },
   "private": true
 }
