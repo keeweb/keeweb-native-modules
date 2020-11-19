@@ -26,7 +26,7 @@
   "dependencies": {
     "argon2": "^0.27.0",
     "keytar": "^7.1.0",
-    "usb": "^1.6.3",
+    "usb": "git+https://github.com/keeweb/node-usb.git#4443fbcf738b02332fb956caca4328f730ab64c7",
     "yubikey-chalresp": "^0.3.0"
   },
   "private": true
