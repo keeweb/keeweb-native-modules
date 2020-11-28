@@ -15,7 +15,7 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get install libudev-dev libusb-1.0-0-dev
       - name: NPM install
-        run: npm i --no-fund
+        run: npm ci
       - name: Cleanup
         run: |
           rm -rf node_modules/usb/build/Release
@@ -52,7 +52,7 @@ jobs:
       - name: Install dependencies
         run: brew install libuv
       - name: NPM install
-        run: npm i --no-fund
+        run: npm ci
       - name: Cleanup
         run: |
           rm -rf node_modules/usb/build/Release
@@ -87,7 +87,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: NPM install
-        run: npm i --no-fund
+        run: npm ci
 
       - name: Cleanup
         run: |
