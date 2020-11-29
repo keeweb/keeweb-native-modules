@@ -9,7 +9,8 @@ jobs:
   build-linux:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Update
         run: sudo apt-get update
       - name: Install dependencies
@@ -48,7 +49,8 @@ jobs:
   build-darwin:
     runs-on: macos-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: Install dependencies
         run: brew install libuv
       - name: NPM install
@@ -85,7 +87,8 @@ jobs:
   build-windows:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: NPM install
         run: npm ci
 
@@ -183,7 +186,8 @@ jobs:
       - build-darwin
       - build-windows
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Download usb linux build
         uses: actions/download-artifact@v1
