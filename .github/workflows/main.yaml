@@ -49,27 +49,24 @@ jobs:
   build-darwin:
     runs-on: macos-latest
     steps:
-      - name: Check SDKs
-        run: |
-          ls -al /Library/Developer/CommandLineTools/SDKs
-          xcrun --sdk macosx --show-sdk-path
-      - name: Switch to Xcode 12.2
-        run: sudo xcode-select -s "/Applications/Xcode_12.2.app"
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Switch to Xcode 12.2
+        run: sudo xcode-select -s "/Applications/Xcode_12.2.app"
       - name: Install dependencies
         run: brew install libuv
       - name: NPM install
         run: npm ci
+
       - name: Cleanup
         run: |
           rm -rf node_modules/usb/build/Release
           rm -rf node_modules/keytar/build/Release
           rm -rf node_modules/argon2/build/Release
           rm -rf node_modules/yubikey-chalresp/build/Release
-      - name: Build
+      - name: Build x64
         run: npm run-script build-arm64
-      - name: Upload usb artifact
+      - name: Upload usb x64 artifact
         uses: actions/upload-artifact@v1
         with:
           name: usb-darwin-x64
@@ -79,15 +76,44 @@ jobs:
         with:
           name: keytar-darwin-x64
           path: node_modules/keytar/build/Release/keytar.node
-      - name: Upload argon2 artifact
+      - name: Upload argon2 x64 artifact
         uses: actions/upload-artifact@v1
         with:
           name: argon2-darwin-x64
           path: node_modules/argon2/build/Release/argon2.node
-      - name: Upload yubikey-chalresp artifact
+      - name: Upload yubikey-chalresp x64 artifact
         uses: actions/upload-artifact@v1
         with:
           name: yubikey-chalresp-darwin-x64
+          path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
+
+      - name: Cleanup
+        run: |
+          rm -rf node_modules/usb/build/Release
+          rm -rf node_modules/keytar/build/Release
+          rm -rf node_modules/argon2/build/Release
+          rm -rf node_modules/yubikey-chalresp/build/Release
+      - name: Build arm64-apple-macos11
+        run: npm run-script build-arm64
+      - name: Upload usb arm64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: usb-darwin-arm64
+          path: node_modules/usb/build/Release/usb_bindings.node
+      - name: Upload keytar artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: keytar-darwin-arm64
+          path: node_modules/keytar/build/Release/keytar.node
+      - name: Upload argon2 arm64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: argon2-darwin-arm64
+          path: node_modules/argon2/build/Release/argon2.node
+      - name: Upload yubikey-chalresp arm64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: yubikey-chalresp-darwin-arm64
           path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
 
 #  build-windows:
