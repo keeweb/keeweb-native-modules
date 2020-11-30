@@ -51,37 +51,69 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Switch to Xcode 12.2
+        run: sudo xcode-select -s "/Applications/Xcode_12.2.app"
       - name: Install dependencies
         run: brew install libuv
       - name: NPM install
         run: npm ci
+
       - name: Cleanup
         run: |
           rm -rf node_modules/usb/build/Release
           rm -rf node_modules/keytar/build/Release
           rm -rf node_modules/argon2/build/Release
           rm -rf node_modules/yubikey-chalresp/build/Release
-      - name: Build
+      - name: Build x64
         run: npm run-script build-x64
-      - name: Upload usb artifact
+      - name: Upload usb x64 artifact
         uses: actions/upload-artifact@v1
         with:
           name: usb-darwin-x64
           path: node_modules/usb/build/Release/usb_bindings.node
-      - name: Upload keytar artifact
+      - name: Upload keytar x64 artifact
         uses: actions/upload-artifact@v1
         with:
           name: keytar-darwin-x64
           path: node_modules/keytar/build/Release/keytar.node
-      - name: Upload argon2 artifact
+      - name: Upload argon2 x64 artifact
         uses: actions/upload-artifact@v1
         with:
           name: argon2-darwin-x64
           path: node_modules/argon2/build/Release/argon2.node
-      - name: Upload yubikey-chalresp artifact
+      - name: Upload yubikey-chalresp x64 artifact
         uses: actions/upload-artifact@v1
         with:
           name: yubikey-chalresp-darwin-x64
+          path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
+
+      - name: Cleanup
+        run: |
+          rm -rf node_modules/usb/build/Release
+          rm -rf node_modules/keytar/build/Release
+          rm -rf node_modules/argon2/build/Release
+          rm -rf node_modules/yubikey-chalresp/build/Release
+      - name: Build arm64
+        run: npm run-script build-arm64-apple-macos11
+      - name: Upload usb arm64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: usb-darwin-arm64
+          path: node_modules/usb/build/Release/usb_bindings.node
+      - name: Upload keytar arm64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: keytar-darwin-arm64
+          path: node_modules/keytar/build/Release/keytar.node
+      - name: Upload argon2 arm64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: argon2-darwin-arm64
+          path: node_modules/argon2/build/Release/argon2.node
+      - name: Upload yubikey-chalresp arm64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: yubikey-chalresp-darwin-arm64
           path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
 
   build-windows:
@@ -193,10 +225,14 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: usb-linux-x64
-      - name: Download usb darwin build
+      - name: Download usb darwin x64 build
         uses: actions/download-artifact@v1
         with:
           name: usb-darwin-x64
+      - name: Download usb darwin arm64 build
+        uses: actions/download-artifact@v1
+        with:
+          name: usb-darwin-arm64
       - name: Download usb windows x64 build
         uses: actions/download-artifact@v1
         with:
@@ -214,10 +250,14 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: keytar-linux-x64
-      - name: Download keytar darwin build
+      - name: Download keytar darwin x64 build
         uses: actions/download-artifact@v1
         with:
           name: keytar-darwin-x64
+      - name: Download keytar darwin arm64 build
+        uses: actions/download-artifact@v1
+        with:
+          name: keytar-darwin-arm64
       - name: Download keytar windows x64 build
         uses: actions/download-artifact@v1
         with:
@@ -235,10 +275,14 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: argon2-linux-x64
-      - name: Download argon2 darwin build
+      - name: Download argon2 darwin x64 build
         uses: actions/download-artifact@v1
         with:
           name: argon2-darwin-x64
+      - name: Download argon2 darwin arm64 build
+        uses: actions/download-artifact@v1
+        with:
+          name: argon2-darwin-arm64
       - name: Download argon2 windows x64 build
         uses: actions/download-artifact@v1
         with:
@@ -256,10 +300,14 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: yubikey-chalresp-linux-x64
-      - name: Download yubikey-chalresp darwin build
+      - name: Download yubikey-chalresp darwin x64 build
         uses: actions/download-artifact@v1
         with:
           name: yubikey-chalresp-darwin-x64
+      - name: Download yubikey-chalresp darwin arm64 build
+        uses: actions/download-artifact@v1
+        with:
+          name: yubikey-chalresp-darwin-arm64
       - name: Download yubikey-chalresp windows x64 build
         uses: actions/download-artifact@v1
         with:
@@ -290,24 +338,28 @@ jobs:
         run: |
           cp usb-linux-x64/usb_bindings.node package/usb-linux-x64.node
           cp usb-darwin-x64/usb_bindings.node package/usb-darwin-x64.node
+          cp usb-darwin-arm64/usb_bindings.node package/usb-darwin-arm64.node
           cp usb-win32-x64/usb_bindings.node package/usb-win32-x64.node
           cp usb-win32-ia32/usb_bindings.node package/usb-win32-ia32.node
           cp usb-win32-arm64/usb_bindings.node package/usb-win32-arm64.node
 
           cp keytar-linux-x64/keytar.node package/keytar-linux-x64.node
           cp keytar-darwin-x64/keytar.node package/keytar-darwin-x64.node
+          cp keytar-darwin-arm64/keytar.node package/keytar-darwin-arm64.node
           cp keytar-win32-x64/keytar.node package/keytar-win32-x64.node
           cp keytar-win32-ia32/keytar.node package/keytar-win32-ia32.node
           cp keytar-win32-arm64/keytar.node package/keytar-win32-arm64.node
 
           cp argon2-linux-x64/argon2.node package/argon2-linux-x64.node
           cp argon2-darwin-x64/argon2.node package/argon2-darwin-x64.node
+          cp argon2-darwin-arm64/argon2.node package/argon2-darwin-arm64.node
           cp argon2-win32-x64/argon2.node package/argon2-win32-x64.node
           cp argon2-win32-ia32/argon2.node package/argon2-win32-ia32.node
           cp argon2-win32-arm64/argon2.node package/argon2-win32-arm64.node
 
           cp yubikey-chalresp-linux-x64/yubikey-chalresp.node package/yubikey-chalresp-linux-x64.node
           cp yubikey-chalresp-darwin-x64/yubikey-chalresp.node package/yubikey-chalresp-darwin-x64.node
+          cp yubikey-chalresp-darwin-arm64/yubikey-chalresp.node package/yubikey-chalresp-darwin-arm64.node
           cp yubikey-chalresp-win32-x64/yubikey-chalresp.node package/yubikey-chalresp-win32-x64.node
           cp yubikey-chalresp-win32-ia32/yubikey-chalresp.node package/yubikey-chalresp-win32-ia32.node
           cp yubikey-chalresp-win32-arm64/yubikey-chalresp.node package/yubikey-chalresp-win32-arm64.node
