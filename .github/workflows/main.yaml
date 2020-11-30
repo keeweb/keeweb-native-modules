@@ -49,6 +49,8 @@ jobs:
   build-darwin:
     runs-on: macos-latest
     steps:
+      - name: Check SDKs
+        run: ls -al /Library/Developer/CommandLineTools/SDKs
       - name: Checkout
         uses: actions/checkout@v2
       - name: Install dependencies
