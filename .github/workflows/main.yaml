@@ -56,6 +56,8 @@ jobs:
       - name: Check SDKs
         run: |
           xcrun --show-sdk-version
+          xcrun --show-sdk-path
+          xcode-select --print-path
           ls -la /Library/Developer/CommandLineTools/SDKs/
 #      - name: Install dependencies
 #        run: brew install libuv
