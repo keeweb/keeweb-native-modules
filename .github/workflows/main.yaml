@@ -97,7 +97,7 @@ jobs:
           rm -rf node_modules/yubikey-chalresp/build/Release
       - name: Build arm64
         env:
-          # SDKROOT is set to MacOS-11.0 to make build for Apple Silicon on GitHub Actions
+          # SDKROOT is set to MacOS-11.0 to make it build for Apple Silicon on GitHub Actions
           # Otherwise is generates "Unsupported architecture" error
           SDKROOT: macosx11.0
         run: npm run-script build-arm64
