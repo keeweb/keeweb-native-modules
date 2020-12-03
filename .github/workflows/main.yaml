@@ -51,6 +51,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+#      - name: List SDKs
+#        run: ls -la /Library/Developer/CommandLineTools/SDKs/
       - name: Switch to Xcode 12.2
         run: sudo xcode-select -s "/Applications/Xcode_12.2.app"
       - name: Install dependencies
@@ -94,6 +96,10 @@ jobs:
           rm -rf node_modules/argon2/build/Release
           rm -rf node_modules/yubikey-chalresp/build/Release
       - name: Build arm64
+        env:
+          # SDKROOT is set to MacOS-11.0 to make build for Apple Silicon on GitHub Actions
+          # Otherwise is generates "Unsupported architecture" error
+          SDKROOT: macosx11.0
         run: npm run-script build-arm64
       - name: Upload usb arm64 artifact
         uses: actions/upload-artifact@v1
