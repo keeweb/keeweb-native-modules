@@ -58,34 +58,34 @@ jobs:
       - name: NPM install
         run: npm ci
 
-      - name: Cleanup
-        run: |
-          rm -rf node_modules/usb/build/Release
-          rm -rf node_modules/keytar/build/Release
-          rm -rf node_modules/argon2/build/Release
-          rm -rf node_modules/yubikey-chalresp/build/Release
-      - name: Build x64
-        run: npm run-script build-x64
-      - name: Upload usb x64 artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: usb-darwin-x64
-          path: node_modules/usb/build/Release/usb_bindings.node
-      - name: Upload keytar x64 artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: keytar-darwin-x64
-          path: node_modules/keytar/build/Release/keytar.node
-      - name: Upload argon2 x64 artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: argon2-darwin-x64
-          path: node_modules/argon2/build/Release/argon2.node
-      - name: Upload yubikey-chalresp x64 artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: yubikey-chalresp-darwin-x64
-          path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
+#      - name: Cleanup
+#        run: |
+#          rm -rf node_modules/usb/build/Release
+#          rm -rf node_modules/keytar/build/Release
+#          rm -rf node_modules/argon2/build/Release
+#          rm -rf node_modules/yubikey-chalresp/build/Release
+#      - name: Build x64
+#        run: npm run-script build-x64
+#      - name: Upload usb x64 artifact
+#        uses: actions/upload-artifact@v1
+#        with:
+#          name: usb-darwin-x64
+#          path: node_modules/usb/build/Release/usb_bindings.node
+#      - name: Upload keytar x64 artifact
+#        uses: actions/upload-artifact@v1
+#        with:
+#          name: keytar-darwin-x64
+#          path: node_modules/keytar/build/Release/keytar.node
+#      - name: Upload argon2 x64 artifact
+#        uses: actions/upload-artifact@v1
+#        with:
+#          name: argon2-darwin-x64
+#          path: node_modules/argon2/build/Release/argon2.node
+#      - name: Upload yubikey-chalresp x64 artifact
+#        uses: actions/upload-artifact@v1
+#        with:
+#          name: yubikey-chalresp-darwin-x64
+#          path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
 
       - name: Cleanup
         run: |
