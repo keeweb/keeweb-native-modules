@@ -93,8 +93,6 @@ jobs:
           rm -rf node_modules/keytar/build/Release
           rm -rf node_modules/argon2/build/Release
           rm -rf node_modules/yubikey-chalresp/build/Release
-      - name: Patch for arm64
-
       - name: Build arm64
         run: npm run-script build-arm64
       - name: Upload usb arm64 artifact
