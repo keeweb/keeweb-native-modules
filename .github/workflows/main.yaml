@@ -97,7 +97,7 @@ jobs:
           rm -rf node_modules/yubikey-chalresp/build/Release
       - name: Patch for arm64
         run: |
-          sed -i .bak 's/"MACOSX_DEPLOYMENT_TARGET": "[[:digit:]]*\.[[:digit:]]*"/"MACOSX_DEPLOYMENT_TARGET": "11.0",\n    "SDKROOT": "macosx10.11"/' node_modules/argon2/binding.gyp
+          sed -i .bak 's/"MACOSX_DEPLOYMENT_TARGET": "[[:digit:]]*\.[[:digit:]]*"/"MACOSX_DEPLOYMENT_TARGET": "11.0", "SDKROOT": "macosx11.0"/' node_modules/argon2/binding.gyp
           cat node_modules/argon2/binding.gyp
       - name: Build arm64
         run: npm run-script build-arm64
