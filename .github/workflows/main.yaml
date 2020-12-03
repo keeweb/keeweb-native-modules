@@ -100,7 +100,11 @@ jobs:
 #          sed -i .bak 's/"MACOSX_DEPLOYMENT_TARGET": "[[:digit:]]*\.[[:digit:]]*"/"MACOSX_DEPLOYMENT_TARGET": "11.0", "SDKROOT": "macosx11.0"/' node_modules/argon2/binding.gyp
 #          cat node_modules/argon2/binding.gyp
       - name: Build arm64
-        run: SDKROOT=macosx11.0 npm run-script build-arm64
+        env:
+          # SDKROOT is set to MacOS-11.0 to make build for Apple Silicon on GitHub Actions
+          # Otherwise is generates "Unsupported architecture" error
+          SDKROOT: macosx11.0
+        run: npm run-script build-arm64
       - name: Upload usb arm64 artifact
         uses: actions/upload-artifact@v1
         with:
