@@ -96,7 +96,7 @@ jobs:
           rm -rf node_modules/argon2/build/Release
           rm -rf node_modules/yubikey-chalresp/build/Release
       - name: Patch for arm64
-        # prebuild-install downloads a wrong architecture, make it shut up
+        # remove it when https://github.com/atom/node-keytar/issues/339 is fixed
         run: node -e "const f = './node_modules/keytar/package.json'; const data = require(f); delete data.dependencies['prebuild-install']; fs.writeFileSync(f, JSON.stringify(data, null, 2))"
       - name: Build arm64
         env:
