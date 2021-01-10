@@ -24,7 +24,7 @@ jobs:
           rm -rf node_modules/argon2/build/Release
           rm -rf node_modules/yubikey-chalresp/build/Release
       - name: Build
-        run: npm run-script build-x64
+        run: npm run-script build-x64-linux
       - name: Upload usb artifact
         uses: actions/upload-artifact@v1
         with:
@@ -66,8 +66,9 @@ jobs:
           rm -rf node_modules/keytar/build/Release
           rm -rf node_modules/argon2/build/Release
           rm -rf node_modules/yubikey-chalresp/build/Release
+          rm -rf node_modules/secure-enclave/build/Release
       - name: Build x64
-        run: npm run-script build-x64
+        run: npm run-script build-x64-darwin
       - name: Upload usb x64 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -88,6 +89,11 @@ jobs:
         with:
           name: yubikey-chalresp-darwin-x64
           path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
+      - name: Upload secure-enclave x64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: secure-enclave-darwin-x64
+          path: node_modules/secure-enclave/build/Release/secure-enclave.node
 
       - name: Cleanup
         run: |
@@ -95,6 +101,7 @@ jobs:
           rm -rf node_modules/keytar/build/Release
           rm -rf node_modules/argon2/build/Release
           rm -rf node_modules/yubikey-chalresp/build/Release
+          rm -rf node_modules/secure-enclave/build/Release
       - name: Patch for arm64
         # remove it when https://github.com/atom/node-keytar/issues/339 is fixed
         run: node -e "const f = './node_modules/keytar/package.json'; const data = require(f); delete data.dependencies['prebuild-install']; fs.writeFileSync(f, JSON.stringify(data, null, 2))"
@@ -103,7 +110,7 @@ jobs:
           # SDKROOT is set to MacOS-11.0 to make it build for Apple Silicon on GitHub Actions
           # Otherwise is generates "Unsupported architecture" error
           SDKROOT: macosx11.0
-        run: npm run-script build-arm64
+        run: npm run-script build-arm64-darwin
       - name: Upload usb arm64 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -124,6 +131,11 @@ jobs:
         with:
           name: yubikey-chalresp-darwin-arm64
           path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
+      - name: Upload secure-enclave arm64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: secure-enclave-darwin-arm64
+          path: node_modules/secure-enclave/build/Release/secure-enclave.node
 
   build-windows:
     runs-on: windows-latest
@@ -140,7 +152,7 @@ jobs:
           rm -r node_modules\argon2\lib\binding
           rm -r node_modules\yubikey-chalresp\build\Release
       - name: Build x64
-        run: npm run-script build-x64
+        run: npm run-script build-x64-win32
       - name: Upload usb x64 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -169,7 +181,7 @@ jobs:
           rm -r node_modules\argon2\lib\binding
           rm -r node_modules\yubikey-chalresp\build\Release
       - name: Build ia32
-        run: npm run-script build-ia32
+        run: npm run-script build-ia32-win32
       - name: Upload usb ia32 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -198,7 +210,7 @@ jobs:
           rm -r node_modules\argon2\lib\binding
           rm -r node_modules\yubikey-chalresp\build\Release
       - name: Build arm64
-        run: npm run-script build-arm64
+        run: npm run-script build-arm64-win32
       - name: Upload usb arm64 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -330,6 +342,15 @@ jobs:
         with:
           name: yubikey-chalresp-win32-arm64
 
+      - name: Download secure-enclave darwin x64 build
+        uses: actions/download-artifact@v1
+        with:
+          name: secure-enclave-darwin-x64
+      - name: Download secure-enclave darwin arm64 build
+        uses: actions/download-artifact@v1
+        with:
+          name: secure-enclave-darwin-arm64
+
       - name: Create release
         id: create_release
         uses: actions/create-release@latest
@@ -372,6 +393,9 @@ jobs:
           cp yubikey-chalresp-win32-x64/yubikey-chalresp.node package/yubikey-chalresp-win32-x64.node
           cp yubikey-chalresp-win32-ia32/yubikey-chalresp.node package/yubikey-chalresp-win32-ia32.node
           cp yubikey-chalresp-win32-arm64/yubikey-chalresp.node package/yubikey-chalresp-win32-arm64.node
+
+          cp secure-enclave-darwin-x64/secure-enclave.node package/secure-enclave-darwin-x64.node
+          cp secure-enclave-darwin-arm64/secure-enclave.node package/secure-enclave-darwin-arm64.node
 
           sed -i "s/0.0.0/${GITHUB_REF/refs\/tags\//}/g" package/package.json
           npm pack ./package

@@ -4,9 +4,12 @@
   "description": "This repo contains native modules for [KeeWeb](https://keeweb.info).",
   "main": "index.js",
   "scripts": {
-    "build-x64": "electron-rebuild --arch=x64",
-    "build-ia32": "electron-rebuild --arch=ia32",
-    "build-arm64": "electron-rebuild --arch=arm64",
+    "build-x64-darwin": "electron-rebuild --arch=x64 --only=argon2,keytar,usb,yubikey-chalresp,secure-enclave",
+    "build-x64-win32": "electron-rebuild --arch=x64 --only=argon2,keytar,usb,yubikey-chalresp",
+    "build-x64-linux": "electron-rebuild --arch=x64 --only=argon2,keytar,usb,yubikey-chalresp",
+    "build-ia32-win32": "electron-rebuild --arch=ia32 --only=argon2,keytar,usb,yubikey-chalresp",
+    "build-arm64-darwin": "electron-rebuild --arch=arm64 --only=argon2,keytar,usb,yubikey-chalresp,secure-enclave",
+    "build-arm64-win32": "electron-rebuild --arch=arm64 --only=argon2,keytar,usb,yubikey-chalresp",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,6 +25,9 @@
   "devDependencies": {
     "electron": "^11.0.3",
     "electron-rebuild": "^2.3.4"
+  },
+  "optionalDependencies": {
+    "secure-enclave": "^0.3.3"
   },
   "dependencies": {
     "argon2": "^0.27.0",
