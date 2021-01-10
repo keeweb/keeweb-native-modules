@@ -23,15 +23,15 @@
   },
   "homepage": "https://github.com/antelle/keeweb-native-modules#readme",
   "devDependencies": {
-    "electron": "^11.0.3",
+    "electron": "^11.1.1",
     "electron-rebuild": "^2.3.4"
   },
   "optionalDependencies": {
-    "secure-enclave": "^0.3.3"
+    "secure-enclave": "^0.3.5"
   },
   "dependencies": {
-    "argon2": "^0.27.0",
-    "keytar": "^7.2.0",
+    "argon2": "^0.27.1",
+    "keytar": "^7.3.0",
     "usb": "git+https://github.com/keeweb/node-usb.git#4443fbcf738b02332fb956caca4328f730ab64c7",
     "yubikey-chalresp": "^0.3.0"
   },
