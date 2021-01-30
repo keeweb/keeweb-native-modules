@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "argon2": "^0.27.1",
-    "keyboard-auto-type": "^0.1.3",
+    "keyboard-auto-type": "^0.1.4",
     "keytar": "^7.3.0",
     "usb": "git+https://github.com/keeweb/node-usb.git#4443fbcf738b02332fb956caca4328f730ab64c7",
     "yubikey-chalresp": "^0.3.0"
