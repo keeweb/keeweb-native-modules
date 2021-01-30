@@ -23,6 +23,7 @@ jobs:
           rm -rf node_modules/keytar/build/Release
           rm -rf node_modules/argon2/build/Release
           rm -rf node_modules/yubikey-chalresp/build/Release
+          rm -rf node_modules/keyboard-auto-type/build/Release
       - name: Build
         run: npm run-script build-x64-linux
       - name: Upload usb artifact
@@ -45,6 +46,11 @@ jobs:
         with:
           name: yubikey-chalresp-linux-x64
           path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
+      - name: Upload keyboard-auto-type artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: keyboard-auto-type-linux-x64
+          path: node_modules/keyboard-auto-type/build/Release/keyboard-auto-type.node
 
   build-darwin:
     runs-on: macos-latest
@@ -66,6 +72,7 @@ jobs:
           rm -rf node_modules/keytar/build/Release
           rm -rf node_modules/argon2/build/Release
           rm -rf node_modules/yubikey-chalresp/build/Release
+          rm -rf node_modules/keyboard-auto-type/build/Release
           rm -rf node_modules/secure-enclave/build/Release
       - name: Build x64
         run: npm run-script build-x64-darwin
@@ -89,6 +96,11 @@ jobs:
         with:
           name: yubikey-chalresp-darwin-x64
           path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
+      - name: Upload keyboard-auto-type x64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: keyboard-auto-type-darwin-x64
+          path: node_modules/keyboard-auto-type/build/Release/keyboard-auto-type.node
       - name: Upload secure-enclave x64 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -101,6 +113,7 @@ jobs:
           rm -rf node_modules/keytar/build/Release
           rm -rf node_modules/argon2/build/Release
           rm -rf node_modules/yubikey-chalresp/build/Release
+          rm -rf node_modules/keyboard-auto-type/build/Release
           rm -rf node_modules/secure-enclave/build/Release
       - name: Patch for arm64
         # remove it when https://github.com/atom/node-keytar/issues/339 is fixed
@@ -131,6 +144,11 @@ jobs:
         with:
           name: yubikey-chalresp-darwin-arm64
           path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
+      - name: Upload keyboard-auto-type arm64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: keyboard-auto-type-darwin-arm64
+          path: node_modules/keyboard-auto-type/build/Release/keyboard-auto-type.node
       - name: Upload secure-enclave arm64 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -151,6 +169,7 @@ jobs:
           rm -r node_modules\keytar\build\Release
           rm -r node_modules\argon2\lib\binding
           rm -r node_modules\yubikey-chalresp\build\Release
+          rm -r node_modules\keyboard-auto-type\build\Release
       - name: Build x64
         run: npm run-script build-x64-win32
       - name: Upload usb x64 artifact
@@ -173,6 +192,11 @@ jobs:
         with:
           name: yubikey-chalresp-win32-x64
           path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
+      - name: Upload keyboard-auto-type x64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: keyboard-auto-type-win32-x64
+          path: node_modules/keyboard-auto-type/build/Release/keyboard-auto-type.node
 
       - name: Cleanup
         run: |
@@ -180,6 +204,7 @@ jobs:
           rm -r node_modules\keytar\build\Release
           rm -r node_modules\argon2\lib\binding
           rm -r node_modules\yubikey-chalresp\build\Release
+          rm -r node_modules\keyboard-auto-type\build\Release
       - name: Build ia32
         run: npm run-script build-ia32-win32
       - name: Upload usb ia32 artifact
@@ -202,6 +227,11 @@ jobs:
         with:
           name: yubikey-chalresp-win32-ia32
           path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
+      - name: Upload keyboard-auto-type ia32 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: keyboard-auto-type-win32-ia32
+          path: node_modules/keyboard-auto-type/build/Release/keyboard-auto-type.node
 
       - name: Cleanup
         run: |
@@ -209,6 +239,7 @@ jobs:
           rm -r node_modules\keytar\build\Release
           rm -r node_modules\argon2\lib\binding
           rm -r node_modules\yubikey-chalresp\build\Release
+          rm -r node_modules\keyboard-auto-type\build\Release
       - name: Build arm64
         run: npm run-script build-arm64-win32
       - name: Upload usb arm64 artifact
@@ -231,6 +262,11 @@ jobs:
         with:
           name: yubikey-chalresp-win32-arm64
           path: node_modules/yubikey-chalresp/build/Release/yubikey-chalresp.node
+      - name: Upload keyboard-auto-type arm64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: keyboard-auto-type-win32-arm64
+          path: node_modules/keyboard-auto-type/build/Release/keyboard-auto-type.node
 
   publish:
     runs-on: ubuntu-latest
@@ -342,6 +378,31 @@ jobs:
         with:
           name: yubikey-chalresp-win32-arm64
 
+      - name: Download keyboard-auto-type linux build
+        uses: actions/download-artifact@v1
+        with:
+          name: keyboard-auto-type-linux-x64
+      - name: Download keyboard-auto-type darwin x64 build
+        uses: actions/download-artifact@v1
+        with:
+          name: keyboard-auto-type-darwin-x64
+      - name: Download keyboard-auto-type darwin arm64 build
+        uses: actions/download-artifact@v1
+        with:
+          name: keyboard-auto-type-darwin-arm64
+      - name: Download keyboard-auto-type windows x64 build
+        uses: actions/download-artifact@v1
+        with:
+          name: keyboard-auto-type-win32-x64
+      - name: Download keyboard-auto-type windows ia32 build
+        uses: actions/download-artifact@v1
+        with:
+          name: keyboard-auto-type-win32-ia32
+      - name: Download keyboard-auto-type windows arm64 build
+        uses: actions/download-artifact@v1
+        with:
+          name: keyboard-auto-type-win32-arm64
+
       - name: Download secure-enclave darwin x64 build
         uses: actions/download-artifact@v1
         with:
@@ -393,6 +454,13 @@ jobs:
           cp yubikey-chalresp-win32-x64/yubikey-chalresp.node package/yubikey-chalresp-win32-x64.node
           cp yubikey-chalresp-win32-ia32/yubikey-chalresp.node package/yubikey-chalresp-win32-ia32.node
           cp yubikey-chalresp-win32-arm64/yubikey-chalresp.node package/yubikey-chalresp-win32-arm64.node
+
+          cp keyboard-auto-type-linux-x64/keyboard-auto-type.node package/keyboard-auto-type-linux-x64.node
+          cp keyboard-auto-type-darwin-x64/keyboard-auto-type.node package/keyboard-auto-type-darwin-x64.node
+          cp keyboard-auto-type-darwin-arm64/keyboard-auto-type.node package/keyboard-auto-type-darwin-arm64.node
+          cp keyboard-auto-type-win32-x64/keyboard-auto-type.node package/keyboard-auto-type-win32-x64.node
+          cp keyboard-auto-type-win32-ia32/keyboard-auto-type.node package/keyboard-auto-type-win32-ia32.node
+          cp keyboard-auto-type-win32-arm64/keyboard-auto-type.node package/keyboard-auto-type-win32-arm64.node
 
           cp secure-enclave-darwin-x64/secure-enclave.node package/secure-enclave-darwin-x64.node
           cp secure-enclave-darwin-arm64/secure-enclave.node package/secure-enclave-darwin-arm64.node
