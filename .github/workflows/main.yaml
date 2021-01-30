@@ -74,6 +74,9 @@ jobs:
           rm -rf node_modules/yubikey-chalresp/build/Release
           rm -rf node_modules/keyboard-auto-type/build/Release
           rm -rf node_modules/secure-enclave/build/Release
+      - name: Patch packages
+        # See https://github.com/tessel/node-usb/issues/409
+        run: node -e "const f = './node_modules/usb/package.json'; const data = require(f); delete data.dependencies['prebuild-install']; fs.writeFileSync(f, JSON.stringify(data, null, 2))"
       - name: Build x64
         run: npm run-script build-x64-darwin
       - name: Upload usb x64 artifact
