@@ -27,7 +27,7 @@
     "electron-rebuild": "^2.3.5"
   },
   "optionalDependencies": {
-    "secure-enclave": "^0.4.0"
+    "secure-enclave": "^0.4.1"
   },
   "dependencies": {
     "argon2": "^0.27.1",
