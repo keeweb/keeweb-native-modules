@@ -31,7 +31,7 @@
   },
   "dependencies": {
     "argon2": "^0.27.1",
-    "keyboard-auto-type": "^0.1.9",
+    "keyboard-auto-type": "^0.1.10",
     "keytar": "^7.4.0",
     "usb": "^1.6.5",
     "yubikey-chalresp": "^0.3.0"
