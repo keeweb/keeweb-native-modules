@@ -498,12 +498,12 @@ jobs:
           cp usb-win32-ia32/usb_bindings.node package/usb-win32-ia32.node
           cp usb-win32-arm64/usb_bindings.node package/usb-win32-arm64.node
 
-          cp usb-linux-x64/detection.node package/usb-detection-linux-x64.node
-          cp usb-darwin-x64/detection.node package/usb-detection-darwin-x64.node
-          cp usb-darwin-arm64/detection.node package/usb-detection-darwin-arm64.node
-          cp usb-win32-x64/detection.node package/usb-detection-win32-x64.node
-          cp usb-win32-ia32/detection.node package/usb-detection-win32-ia32.node
-          cp usb-win32-arm64/detection.node package/usb-detection-win32-arm64.node
+          cp usb-detection-linux-x64/detection.node package/usb-detection-linux-x64.node
+          cp usb-detection-darwin-x64/detection.node package/usb-detection-darwin-x64.node
+          cp usb-detection-darwin-arm64/detection.node package/usb-detection-darwin-arm64.node
+          cp usb-detection-win32-x64/detection.node package/usb-detection-win32-x64.node
+          cp usb-detection-win32-ia32/detection.node package/usb-detection-win32-ia32.node
+          cp usb-detection-win32-arm64/detection.node package/usb-detection-win32-arm64.node
 
           cp keytar-linux-x64/keytar.node package/keytar-linux-x64.node
           cp keytar-darwin-x64/keytar.node package/keytar-darwin-x64.node
