@@ -20,6 +20,7 @@ jobs:
       - name: Cleanup
         run: |
           rm -rf node_modules/usb/build/Release
+          rm -rf node_modules/usb-detection/build/Release
           rm -rf node_modules/keytar/build/Release
           rm -rf node_modules/argon2/build/Release
           rm -rf node_modules/yubikey-chalresp/build/Release
@@ -31,6 +32,11 @@ jobs:
         with:
           name: usb-linux-x64
           path: node_modules/usb/build/Release/usb_bindings.node
+      - name: Upload usb-detection artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: usb-detection-linux-x64
+          path: node_modules/usb-detection/build/Release/detection.node
       - name: Upload keytar artifact
         uses: actions/upload-artifact@v1
         with:
@@ -69,6 +75,7 @@ jobs:
       - name: Cleanup
         run: |
           rm -rf node_modules/usb/build/Release
+          rm -rf node_modules/usb-detection/build/Release
           rm -rf node_modules/keytar/build/Release
           rm -rf node_modules/argon2/build/Release
           rm -rf node_modules/yubikey-chalresp/build/Release
@@ -84,6 +91,11 @@ jobs:
         with:
           name: usb-darwin-x64
           path: node_modules/usb/build/Release/usb_bindings.node
+      - name: Upload usb-detection x64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: usb-detection-darwin-x64
+          path: node_modules/usb-detection/build/Release/detection.node
       - name: Upload keytar x64 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -113,6 +125,7 @@ jobs:
       - name: Cleanup
         run: |
           rm -rf node_modules/usb/build/Release
+          rm -rf node_modules/usb-detection/build/Release
           rm -rf node_modules/keytar/build/Release
           rm -rf node_modules/argon2/build/Release
           rm -rf node_modules/yubikey-chalresp/build/Release
@@ -132,6 +145,11 @@ jobs:
         with:
           name: usb-darwin-arm64
           path: node_modules/usb/build/Release/usb_bindings.node
+      - name: Upload usb-detection arm64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: usb-detection-darwin-arm64
+          path: node_modules/usb-detection/build/Release/detection.node
       - name: Upload keytar arm64 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -169,6 +187,7 @@ jobs:
       - name: Cleanup
         run: |
           rm -r node_modules\usb\build\Release
+          rm -r node_modules\usb-detection\build\Release
           rm -r node_modules\keytar\build\Release
           rm -r node_modules\argon2\lib\binding
           rm -r node_modules\yubikey-chalresp\build\Release
@@ -180,6 +199,11 @@ jobs:
         with:
           name: usb-win32-x64
           path: node_modules/usb/build/Release/usb_bindings.node
+      - name: Upload usb-detection x64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: usb-detection-win32-x64
+          path: node_modules/usb-detection/build/Release/detection.node
       - name: Upload keytar x64 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -204,6 +228,7 @@ jobs:
       - name: Cleanup
         run: |
           rm -r node_modules\usb\build\Release
+          rm -r node_modules\usb-detection\build\Release
           rm -r node_modules\keytar\build\Release
           rm -r node_modules\argon2\lib\binding
           rm -r node_modules\yubikey-chalresp\build\Release
@@ -215,6 +240,11 @@ jobs:
         with:
           name: usb-win32-ia32
           path: node_modules/usb/build/Release/usb_bindings.node
+      - name: Upload usb-detection ia32 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: usb-detection-win32-ia32
+          path: node_modules/usb-detection/build/Release/detection.node
       - name: Upload keytar ia32 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -239,6 +269,7 @@ jobs:
       - name: Cleanup
         run: |
           rm -r node_modules\usb\build\Release
+          rm -r node_modules\usb-detection\build\Release
           rm -r node_modules\keytar\build\Release
           rm -r node_modules\argon2\lib\binding
           rm -r node_modules\yubikey-chalresp\build\Release
@@ -250,6 +281,11 @@ jobs:
         with:
           name: usb-win32-arm64
           path: node_modules/usb/build/Release/usb_bindings.node
+      - name: Upload usb-detection arm64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: usb-detection-win32-arm64
+          path: node_modules/usb-detection/build/Release/detection.node
       - name: Upload keytar arm64 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -305,6 +341,31 @@ jobs:
         uses: actions/download-artifact@v1
         with:
           name: usb-win32-arm64
+          
+      - name: Download usb-detection linux build
+        uses: actions/download-artifact@v1
+        with:
+          name: usb-detection-linux-x64
+      - name: Download usb-detection darwin x64 build
+        uses: actions/download-artifact@v1
+        with:
+          name: usb-detection-darwin-x64
+      - name: Download usb-detection darwin arm64 build
+        uses: actions/download-artifact@v1
+        with:
+          name: usb-detection-darwin-arm64
+      - name: Download usb-detection windows x64 build
+        uses: actions/download-artifact@v1
+        with:
+          name: usb-detection-win32-x64
+      - name: Download usb-detection windows ia32 build
+        uses: actions/download-artifact@v1
+        with:
+          name: usb-detection-win32-ia32
+      - name: Download usb-detection windows arm64 build
+        uses: actions/download-artifact@v1
+        with:
+          name: usb-detection-win32-arm64
 
       - name: Download keytar linux build
         uses: actions/download-artifact@v1
@@ -436,6 +497,13 @@ jobs:
           cp usb-win32-x64/usb_bindings.node package/usb-win32-x64.node
           cp usb-win32-ia32/usb_bindings.node package/usb-win32-ia32.node
           cp usb-win32-arm64/usb_bindings.node package/usb-win32-arm64.node
+
+          cp usb-linux-x64/detection.node package/usb-detection-linux-x64.node
+          cp usb-darwin-x64/detection.node package/usb-detection-darwin-x64.node
+          cp usb-darwin-arm64/detection.node package/usb-detection-darwin-arm64.node
+          cp usb-win32-x64/detection.node package/usb-detection-win32-x64.node
+          cp usb-win32-ia32/detection.node package/usb-detection-win32-ia32.node
+          cp usb-win32-arm64/detection.node package/usb-detection-win32-arm64.node
 
           cp keytar-linux-x64/keytar.node package/keytar-linux-x64.node
           cp keytar-darwin-x64/keytar.node package/keytar-darwin-x64.node
