@@ -19,7 +19,6 @@ jobs:
         run: npm ci
       - name: Cleanup
         run: |
-          rm -rf node_modules/usb/build/Release
           rm -rf node_modules/usb-detection/build/Release
           rm -rf node_modules/keytar/build/Release
           rm -rf node_modules/argon2/build/Release
@@ -27,11 +26,6 @@ jobs:
           rm -rf node_modules/keyboard-auto-type/build/Release
       - name: Build
         run: npm run-script build-x64-linux
-      - name: Upload usb artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: usb-linux-x64
-          path: node_modules/usb/build/Release/usb_bindings.node
       - name: Upload usb-detection artifact
         uses: actions/upload-artifact@v1
         with:
@@ -74,23 +68,14 @@ jobs:
 
       - name: Cleanup
         run: |
-          rm -rf node_modules/usb/build/Release
           rm -rf node_modules/usb-detection/build/Release
           rm -rf node_modules/keytar/build/Release
           rm -rf node_modules/argon2/build/Release
           rm -rf node_modules/yubikey-chalresp/build/Release
           rm -rf node_modules/keyboard-auto-type/build/Release
           rm -rf node_modules/secure-enclave/build/Release
-      - name: Patch packages
-        # See https://github.com/tessel/node-usb/issues/409
-        run: node -e "const f = './node_modules/usb/package.json'; const data = require(f); delete data.dependencies['prebuild-install']; fs.writeFileSync(f, JSON.stringify(data, null, 2))"
       - name: Build x64
         run: npm run-script build-x64-darwin
-      - name: Upload usb x64 artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: usb-darwin-x64
-          path: node_modules/usb/build/Release/usb_bindings.node
       - name: Upload usb-detection x64 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -124,7 +109,6 @@ jobs:
 
       - name: Cleanup
         run: |
-          rm -rf node_modules/usb/build/Release
           rm -rf node_modules/usb-detection/build/Release
           rm -rf node_modules/keytar/build/Release
           rm -rf node_modules/argon2/build/Release
@@ -140,11 +124,6 @@ jobs:
           # Otherwise is generates "Unsupported architecture" error
           SDKROOT: macosx11.0
         run: npm run-script build-arm64-darwin
-      - name: Upload usb arm64 artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: usb-darwin-arm64
-          path: node_modules/usb/build/Release/usb_bindings.node
       - name: Upload usb-detection arm64 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -186,7 +165,6 @@ jobs:
 
       - name: Cleanup
         run: |
-          rm -r node_modules\usb\build\Release
           rm -r node_modules\usb-detection\build\Release
           rm -r node_modules\keytar\build\Release
           rm -r node_modules\argon2\lib\binding
@@ -194,11 +172,6 @@ jobs:
           rm -r node_modules\keyboard-auto-type\build\Release
       - name: Build x64
         run: npm run-script build-x64-win32
-      - name: Upload usb x64 artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: usb-win32-x64
-          path: node_modules/usb/build/Release/usb_bindings.node
       - name: Upload usb-detection x64 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -227,7 +200,6 @@ jobs:
 
       - name: Cleanup
         run: |
-          rm -r node_modules\usb\build\Release
           rm -r node_modules\usb-detection\build\Release
           rm -r node_modules\keytar\build\Release
           rm -r node_modules\argon2\lib\binding
@@ -235,11 +207,6 @@ jobs:
           rm -r node_modules\keyboard-auto-type\build\Release
       - name: Build ia32
         run: npm run-script build-ia32-win32
-      - name: Upload usb ia32 artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: usb-win32-ia32
-          path: node_modules/usb/build/Release/usb_bindings.node
       - name: Upload usb-detection ia32 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -268,7 +235,6 @@ jobs:
 
       - name: Cleanup
         run: |
-          rm -r node_modules\usb\build\Release
           rm -r node_modules\usb-detection\build\Release
           rm -r node_modules\keytar\build\Release
           rm -r node_modules\argon2\lib\binding
@@ -276,11 +242,6 @@ jobs:
           rm -r node_modules\keyboard-auto-type\build\Release
       - name: Build arm64
         run: npm run-script build-arm64-win32
-      - name: Upload usb arm64 artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: usb-win32-arm64
-          path: node_modules/usb/build/Release/usb_bindings.node
       - name: Upload usb-detection arm64 artifact
         uses: actions/upload-artifact@v1
         with:
@@ -317,31 +278,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Download usb linux build
-        uses: actions/download-artifact@v1
-        with:
-          name: usb-linux-x64
-      - name: Download usb darwin x64 build
-        uses: actions/download-artifact@v1
-        with:
-          name: usb-darwin-x64
-      - name: Download usb darwin arm64 build
-        uses: actions/download-artifact@v1
-        with:
-          name: usb-darwin-arm64
-      - name: Download usb windows x64 build
-        uses: actions/download-artifact@v1
-        with:
-          name: usb-win32-x64
-      - name: Download usb windows ia32 build
-        uses: actions/download-artifact@v1
-        with:
-          name: usb-win32-ia32
-      - name: Download usb windows arm64 build
-        uses: actions/download-artifact@v1
-        with:
-          name: usb-win32-arm64
-          
       - name: Download usb-detection linux build
         uses: actions/download-artifact@v1
         with:
@@ -491,13 +427,6 @@ jobs:
         env:
           GITHUB_REF: ${{ github.ref }}
         run: |
-          cp usb-linux-x64/usb_bindings.node package/usb-linux-x64.node
-          cp usb-darwin-x64/usb_bindings.node package/usb-darwin-x64.node
-          cp usb-darwin-arm64/usb_bindings.node package/usb-darwin-arm64.node
-          cp usb-win32-x64/usb_bindings.node package/usb-win32-x64.node
-          cp usb-win32-ia32/usb_bindings.node package/usb-win32-ia32.node
-          cp usb-win32-arm64/usb_bindings.node package/usb-win32-arm64.node
-
           cp usb-detection-linux-x64/detection.node package/usb-detection-linux-x64.node
           cp usb-detection-darwin-x64/detection.node package/usb-detection-darwin-x64.node
           cp usb-detection-darwin-arm64/detection.node package/usb-detection-darwin-arm64.node

@@ -4,12 +4,12 @@
   "description": "This repo contains native modules for [KeeWeb](https://keeweb.info).",
   "main": "index.js",
   "scripts": {
-    "build-x64-darwin": "electron-rebuild --arch=x64 --only=argon2,keytar,usb,usb-detection,yubikey-chalresp,keyboard-auto-type,secure-enclave",
-    "build-x64-win32": "electron-rebuild --arch=x64 --only=argon2,keytar,usb,usb-detection,yubikey-chalresp,keyboard-auto-type",
-    "build-x64-linux": "electron-rebuild --arch=x64 --only=argon2,keytar,usb,usb-detection,yubikey-chalresp,keyboard-auto-type",
-    "build-ia32-win32": "electron-rebuild --arch=ia32 --only=argon2,keytar,usb,usb-detection,yubikey-chalresp,keyboard-auto-type",
-    "build-arm64-darwin": "electron-rebuild --arch=arm64 --only=argon2,keytar,usb,usb-detection,yubikey-chalresp,keyboard-auto-type,secure-enclave",
-    "build-arm64-win32": "electron-rebuild --arch=arm64 --only=argon2,keytar,usb,usb-detection,yubikey-chalresp,keyboard-auto-type",
+    "build-x64-darwin": "electron-rebuild --arch=x64 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type,secure-enclave",
+    "build-x64-win32": "electron-rebuild --arch=x64 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type",
+    "build-x64-linux": "electron-rebuild --arch=x64 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type",
+    "build-ia32-win32": "electron-rebuild --arch=ia32 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type",
+    "build-arm64-darwin": "electron-rebuild --arch=arm64 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type,secure-enclave",
+    "build-arm64-win32": "electron-rebuild --arch=arm64 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -33,7 +33,6 @@
     "argon2": "^0.27.1",
     "keyboard-auto-type": "^0.1.10",
     "keytar": "^7.4.0",
-    "usb": "^1.6.5",
     "usb-detection": "^4.10.0",
     "yubikey-chalresp": "^0.3.0"
   },
