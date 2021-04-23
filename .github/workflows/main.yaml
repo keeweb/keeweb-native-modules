@@ -161,14 +161,6 @@ jobs:
       - name: NPM install
         run: npm ci --ignore-scripts
 
-      - name: Cleanup
-        run: |
-          rm -r node_modules\usb-detection\build\Release
-          rm -r node_modules\keytar\build\Release
-          rm -r node_modules\argon2\lib\binding
-          rm -r node_modules\yubikey-chalresp\build\Release
-          rm -r node_modules\keyboard-auto-type\build\Release
-          rm -r node_modules\windows-native-registry\build\Release
       - name: Build x64
         run: npm run-script build-x64-win32
       - name: Upload usb-detection x64 artifact
@@ -281,7 +273,7 @@ jobs:
       - name: Upload windows-native-registry arm64 artifact
         uses: actions/upload-artifact@v1
         with:
-          name: keyboard-auto-type-win32-arm64
+          name: windows-native-registry-win32-arm64
           path: node_modules/windows-native-registry/build/Release/native.node
 
   publish:
