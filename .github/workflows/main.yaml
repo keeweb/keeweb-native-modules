@@ -196,11 +196,6 @@ jobs:
         with:
           name: keyboard-auto-type-win32-x64
           path: node_modules/keyboard-auto-type/build/Release/keyboard-auto-type.node
-      - name: List
-        run: |
-          dir node_modules\windows-native-registry
-          dir node_modules\windows-native-registry\build
-          dir node_modules\windows-native-registry\build\Release
       - name: Upload windows-native-registry x64 artifact
         uses: actions/upload-artifact@v1
         with:

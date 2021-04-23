@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build-x64-darwin": "electron-rebuild --arch=x64 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type,secure-enclave",
-    "build-x64-win32": "electron-rebuild --arch=x64 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type",
+    "build-x64-win32": "electron-rebuild --arch=x64 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type,windows-native-registry",
     "build-x64-linux": "electron-rebuild --arch=x64 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type",
-    "build-ia32-win32": "electron-rebuild --arch=ia32 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type",
+    "build-ia32-win32": "electron-rebuild --arch=ia32 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type,windows-native-registry",
     "build-arm64-darwin": "electron-rebuild --arch=arm64 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type,secure-enclave",
     "build-arm64-win32": "electron-rebuild --arch=arm64 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type,windows-native-registry",
     "test": "echo \"Error: no test specified\" && exit 1"
