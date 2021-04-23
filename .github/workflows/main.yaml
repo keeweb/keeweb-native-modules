@@ -200,7 +200,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: windows-native-registry-win32-x64
-          path: node_modules/windows-native-registry/build/Release/windows-native-registry.node
+          path: node_modules/windows-native-registry/build/Release/native.node
 
       - name: Cleanup
         run: |
@@ -241,7 +241,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: windows-native-registry-win32-ia32
-          path: node_modules/windows-native-registry/build/Release/windows-native-registry.node
+          path: node_modules/windows-native-registry/build/Release/native.node
 
       - name: Cleanup
         run: |
@@ -282,7 +282,7 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           name: keyboard-auto-type-win32-arm64
-          path: node_modules/windows-native-registry/build/Release/windows-native-registry.node
+          path: node_modules/windows-native-registry/build/Release/native.node
 
   publish:
     runs-on: ubuntu-latest
@@ -494,9 +494,9 @@ jobs:
           cp secure-enclave-darwin-x64/secure-enclave.node package/secure-enclave-darwin-x64.node
           cp secure-enclave-darwin-arm64/secure-enclave.node package/secure-enclave-darwin-arm64.node
 
-          cp windows-native-registry-win32-x64/windows-native-registry.node package/windows-native-registry-win32-x64.node
-          cp windows-native-registry-win32-ia32/windows-native-registry.node package/windows-native-registry-win32-ia32.node
-          cp windows-native-registry-win32-arm64/windows-native-registry.node package/windows-native-registry-win32-arm64.node
+          cp windows-native-registry-win32-x64/native.node package/windows-native-registry-win32-x64.node
+          cp windows-native-registry-win32-ia32/native.node package/windows-native-registry-win32-ia32.node
+          cp windows-native-registry-win32-arm64/native.node package/windows-native-registry-win32-arm64.node
 
           sed -i "s/0.0.0/${GITHUB_REF/refs\/tags\//}/g" package/package.json
           npm pack ./package
