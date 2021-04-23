@@ -16,7 +16,7 @@ jobs:
       - name: Install dependencies
         run: sudo apt-get install libudev-dev libusb-1.0-0-dev xorg-dev libxtst-dev libatspi2.0-dev
       - name: NPM install
-        run: npm ci
+        run: npm ci --ignore-scripts
       - name: Cleanup
         run: |
           rm -rf node_modules/usb-detection/build/Release
@@ -62,7 +62,7 @@ jobs:
       - name: Install dependencies
         run: brew install libuv
       - name: NPM install
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Cleanup
         run: |
@@ -159,7 +159,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: NPM install
-        run: npm ci
+        run: npm ci --ignore-scripts
 
       - name: Cleanup
         run: |

@@ -34,7 +34,7 @@
     "argon2": "^0.27.2",
     "keyboard-auto-type": "^0.1.12",
     "keytar": "^7.6.0",
-    "usb-detection": "^4.10.0",
+    "usb-detection": "github:antelle/node-usb-detection#0ae0d306b02c3a37404d5ff25a424b29c3899727",
     "yubikey-chalresp": "^0.3.0"
   },
   "private": true
