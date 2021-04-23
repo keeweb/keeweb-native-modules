@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "build-x64-darwin": "electron-rebuild --arch=x64 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type,secure-enclave",
-    "build-x64-win32": "electron-rebuild --arch=x64 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type,windows-native-registry",
+    "build-x64-win32": "electron-rebuild --arch=x64 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type",
     "build-x64-linux": "electron-rebuild --arch=x64 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type",
-    "build-ia32-win32": "electron-rebuild --arch=ia32 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type,windows-native-registry",
+    "build-ia32-win32": "electron-rebuild --arch=ia32 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type",
     "build-arm64-darwin": "electron-rebuild --arch=arm64 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type,secure-enclave",
-    "build-arm64-win32": "electron-rebuild --arch=arm64 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type,windows-native-registry",
+    "build-arm64-win32": "electron-rebuild --arch=arm64 --only=argon2,keytar,usb-detection,yubikey-chalresp,keyboard-auto-type",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,8 +27,7 @@
     "electron-rebuild": "^2.3.5"
   },
   "optionalDependencies": {
-    "secure-enclave": "^0.4.1",
-    "windows-native-registry": "^3.0.0"
+    "secure-enclave": "^0.4.1"
   },
   "dependencies": {
     "argon2": "^0.27.2",
