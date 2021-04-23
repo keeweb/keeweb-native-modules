@@ -57,8 +57,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-#      - name: List SDKs
-#        run: ls -la /Library/Developer/CommandLineTools/SDKs/
       - name: Switch to Xcode 12.2
         run: sudo xcode-select -s "/Applications/Xcode_12.2.app"
       - name: Install dependencies
@@ -170,6 +168,7 @@ jobs:
           rm -r node_modules\argon2\lib\binding
           rm -r node_modules\yubikey-chalresp\build\Release
           rm -r node_modules\keyboard-auto-type\build\Release
+          rm -r node_modules\windows-native-registry\build\Release
       - name: Build x64
         run: npm run-script build-x64-win32
       - name: Upload usb-detection x64 artifact
@@ -197,6 +196,11 @@ jobs:
         with:
           name: keyboard-auto-type-win32-x64
           path: node_modules/keyboard-auto-type/build/Release/keyboard-auto-type.node
+      - name: Upload windows-native-registry x64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: windows-native-registry-win32-x64
+          path: node_modules/windows-native-registry/build/Release/windows-native-registry.node
 
       - name: Cleanup
         run: |
@@ -205,6 +209,7 @@ jobs:
           rm -r node_modules\argon2\lib\binding
           rm -r node_modules\yubikey-chalresp\build\Release
           rm -r node_modules\keyboard-auto-type\build\Release
+          rm -r node_modules\windows-native-registry\build\Release
       - name: Build ia32
         run: npm run-script build-ia32-win32
       - name: Upload usb-detection ia32 artifact
@@ -232,6 +237,11 @@ jobs:
         with:
           name: keyboard-auto-type-win32-ia32
           path: node_modules/keyboard-auto-type/build/Release/keyboard-auto-type.node
+      - name: Upload windows-native-registry ia32 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: windows-native-registry-win32-ia32
+          path: node_modules/windows-native-registry/build/Release/windows-native-registry.node
 
       - name: Cleanup
         run: |
@@ -240,6 +250,7 @@ jobs:
           rm -r node_modules\argon2\lib\binding
           rm -r node_modules\yubikey-chalresp\build\Release
           rm -r node_modules\keyboard-auto-type\build\Release
+          rm -r node_modules\windows-native-registry\build\Release
       - name: Build arm64
         run: npm run-script build-arm64-win32
       - name: Upload usb-detection arm64 artifact
@@ -267,6 +278,11 @@ jobs:
         with:
           name: keyboard-auto-type-win32-arm64
           path: node_modules/keyboard-auto-type/build/Release/keyboard-auto-type.node
+      - name: Upload windows-native-registry arm64 artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: keyboard-auto-type-win32-arm64
+          path: node_modules/windows-native-registry/build/Release/windows-native-registry.node
 
   publish:
     runs-on: ubuntu-latest
@@ -412,6 +428,19 @@ jobs:
         with:
           name: secure-enclave-darwin-arm64
 
+      - name: Download windows-native-registry windows x64 build
+        uses: actions/download-artifact@v1
+        with:
+          name: windows-native-registry-win32-x64
+      - name: Download windows-native-registry windows ia32 build
+        uses: actions/download-artifact@v1
+        with:
+          name: windows-native-registry-win32-ia32
+      - name: Download windows-native-registry windows arm64 build
+        uses: actions/download-artifact@v1
+        with:
+          name: windows-native-registry-win32-arm64
+
       - name: Create release
         id: create_release
         uses: actions/create-release@latest
@@ -464,6 +493,10 @@ jobs:
 
           cp secure-enclave-darwin-x64/secure-enclave.node package/secure-enclave-darwin-x64.node
           cp secure-enclave-darwin-arm64/secure-enclave.node package/secure-enclave-darwin-arm64.node
+
+          cp windows-native-registry-win32-x64/windows-native-registry.node package/windows-native-registry-win32-x64.node
+          cp windows-native-registry-win32-ia32/windows-native-registry.node package/windows-native-registry-win32-ia32.node
+          cp windows-native-registry-win32-arm64/windows-native-registry.node package/windows-native-registry-win32-arm64.node
 
           sed -i "s/0.0.0/${GITHUB_REF/refs\/tags\//}/g" package/package.json
           npm pack ./package
